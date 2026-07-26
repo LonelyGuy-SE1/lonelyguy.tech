@@ -31,7 +31,7 @@
       "location": "India"
     }
   },
-  "generatedAt": "2026-07-22T17:34:42.650Z",
+  "generatedAt": "2026-07-26T15:52:51.295Z",
   "routes": [
     {
       "type": "page",
@@ -62,6 +62,14 @@
       "title": "Gallery",
       "url": "https://lonelyguy.tech/gallery",
       "summary": "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
+      "tags": [],
+      "date": ""
+    },
+    {
+      "type": "page",
+      "title": "Subdomains & Live Apps",
+      "url": "https://lonelyguy.tech/apps",
+      "summary": "Deployed apps, documentation sites, and live demos.",
       "tags": [],
       "date": ""
     },
@@ -191,218 +199,170 @@
     },
     {
       "type": "gallery",
-      "title": "syntagma versions_default",
+      "title": "Version comparison diff",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma versions_default",
+      "summary": "Side-by-side version comparison diff",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma versions_rename_category",
+      "title": "Curriculum PDF preview",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma versions_rename_category",
+      "summary": "Full curriculum PDF preview",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma versions_current_document",
+      "title": "Syntagma dashboard",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma versions_current_document",
+      "summary": "Syntagma dashboard",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma versions_annotated_comparision",
+      "title": "Syntagma agentic editor",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma versions_annotated_comparision",
+      "summary": "Agentic editor with chat, fields panel, and draft review",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma submit_course_page",
+      "title": "Cybersec OpenEnv",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma submit_course_page",
+      "summary": "Cybersec OpenEnv environment visualization",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma preview_single_course",
+      "title": "Raijin LOB benchmarks",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma preview_single_course",
+      "summary": "Raijin LOB benchmark brief",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma preview_full_sem",
+      "title": "Project Halide workbench",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma preview_full_sem",
+      "summary": "Project Halide diagnostic workbench interface",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma preview_full_doc",
+      "title": "Humanoid circuit",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma preview_full_doc",
+      "summary": "Humanoid robot circuit design",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma home_page",
+      "title": "Biped arm simulation",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma home_page",
+      "summary": "Bipedal robot arm simulation",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma editor_single_course",
+      "title": "Biped arm result",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma editor_single_course",
+      "summary": "Bipedal robot arm training result",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma editor_sample_annotated",
+      "title": "Biped arm training graph",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma editor_sample_annotated",
+      "summary": "Bipedal robot arm training graph",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma editor_sample_1",
+      "title": "Clanker pose",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma editor_sample_1",
+      "summary": "Clanker robot pose estimation",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma courses_filtered_visible_toggle",
+      "title": "Shiori extension",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma courses_filtered_visible_toggle",
+      "summary": "Shiori robot extension mechanism",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma courses_delete_modal",
+      "title": "Atari Breakout",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma courses_delete_modal",
+      "summary": "Atari Breakout game frame",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma courses_default",
+      "title": "Breakout preprocessing",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma courses_default",
+      "summary": "Preprocessed Breakout observation frame",
       "tags": [],
       "date": ""
     },
     {
       "type": "gallery",
-      "title": "syntagma auth_page",
+      "title": "Damaged 35mm negative",
       "url": "https://lonelyguy.tech/gallery",
-      "summary": "syntagma auth_page",
+      "summary": "Damaged 35mm negative used to evaluate Project Halide",
       "tags": [],
       "date": ""
     },
     {
-      "type": "gallery",
-      "title": "biped arm result",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "biped arm result",
-      "tags": [],
+      "type": "apps",
+      "title": "Syntagma",
+      "url": "https://lonelyguy.tech/apps",
+      "summary": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
+      "tags": [
+        "demo"
+      ],
       "date": ""
     },
     {
-      "type": "gallery",
-      "title": "clanker pose",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "clanker pose",
-      "tags": [],
+      "type": "apps",
+      "title": "Project Halide",
+      "url": "https://lonelyguy.tech/apps",
+      "summary": "Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.",
+      "tags": [
+        "demo"
+      ],
       "date": ""
     },
     {
-      "type": "gallery",
-      "title": "env cybersec",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "env cybersec",
-      "tags": [],
+      "type": "apps",
+      "title": "Cybersec OpenEnv",
+      "url": "https://lonelyguy.tech/apps",
+      "summary": "Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.",
+      "tags": [
+        "demo"
+      ],
       "date": ""
     },
     {
-      "type": "gallery",
-      "title": "humanoid circuit",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "humanoid circuit",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "shiori extension",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "shiori extension",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "atari breakout",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "atari breakout",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "atari breakout preprocessing",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "atari breakout preprocessing",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "bench raijin",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "bench raijin",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "biped arm training graph",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "biped arm training graph",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "biped arm",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "biped arm",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "yuri",
-      "url": "https://lonelyguy.tech/gallery",
-      "summary": "yuri",
-      "tags": [],
+      "type": "apps",
+      "title": "Raijin LOB",
+      "url": "https://lonelyguy.tech/apps",
+      "summary": "Documentation and public benchmarks for the C++ limit order book engine.",
+      "tags": [
+        "docs"
+      ],
       "date": ""
     }
   ]

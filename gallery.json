@@ -1,0 +1,82 @@
+[
+  {
+    "url": "gallery/syntagma.home_page.png",
+    "alt": "Syntagma dashboard",
+    "caption": "Syntagma dashboard"
+  },
+  {
+    "url": "gallery/syntagma.editor_sample_annotated.png",
+    "alt": "Agentic editor with chat, fields panel, and draft review",
+    "caption": "Syntagma agentic editor"
+  },
+  {
+    "url": "gallery/syntagma.preview_full_doc.png",
+    "alt": "Full curriculum PDF preview",
+    "caption": "Curriculum PDF preview"
+  },
+  {
+    "url": "gallery/syntagma.versions_annotated_comparision.png",
+    "alt": "Side-by-side version comparison diff",
+    "caption": "Version comparison diff"
+  },
+  {
+    "url": "gallery/env.cybersec.png",
+    "alt": "Cybersec OpenEnv environment visualization",
+    "caption": "Cybersec OpenEnv"
+  },
+  {
+    "url": "gallery/bench.raijin.png",
+    "alt": "Raijin LOB benchmark brief",
+    "caption": "Raijin LOB benchmarks"
+  },
+  {
+    "url": "assets/halide/halide-app.png",
+    "alt": "Project Halide diagnostic workbench interface",
+    "caption": "Project Halide workbench"
+  },
+  {
+    "url": "assets/halide/real-35mm-negative-banner.jpg",
+    "alt": "Damaged 35mm negative used to evaluate Project Halide",
+    "caption": "Damaged 35mm negative"
+  },
+  {
+    "url": "gallery/humanoid.circuit.png",
+    "alt": "Humanoid robot circuit design",
+    "caption": "Humanoid circuit"
+  },
+  {
+    "url": "gallery/biped.arm.png",
+    "alt": "Bipedal robot arm simulation",
+    "caption": "Biped arm simulation"
+  },
+  {
+    "url": "gallery/biped.arm.result.png",
+    "alt": "Bipedal robot arm training result",
+    "caption": "Biped arm result"
+  },
+  {
+    "url": "gallery/biped.arm.graph.png",
+    "alt": "Bipedal robot arm training graph",
+    "caption": "Biped arm training graph"
+  },
+  {
+    "url": "gallery/clanker.pose.png",
+    "alt": "Clanker robot pose estimation",
+    "caption": "Clanker pose"
+  },
+  {
+    "url": "gallery/shiori.extension.png",
+    "alt": "Shiori robot extension mechanism",
+    "caption": "Shiori extension"
+  },
+  {
+    "url": "gallery/atari.breakout.png",
+    "alt": "Atari Breakout game frame",
+    "caption": "Atari Breakout"
+  },
+  {
+    "url": "gallery/atari.breakout.preprocessing.png",
+    "alt": "Preprocessed Breakout observation frame",
+    "caption": "Breakout preprocessing"
+  }
+]

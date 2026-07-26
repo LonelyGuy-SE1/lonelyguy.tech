@@ -25,7 +25,14 @@
     "title": "Gallery",
     "summary": "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
     "url": "/gallery",
-    "content": "syntagma versions_default syntagma versions_rename_category syntagma versions_current_document syntagma versions_annotated_comparision syntagma submit_course_page syntagma preview_single_course syntagma preview_full_sem syntagma preview_full_doc syntagma home_page syntagma editor_single_course syntagma editor_sample_annotated syntagma editor_sample_1 syntagma courses_filtered_visible_toggle syntagma courses_delete_modal syntagma courses_default syntagma auth_page biped arm result clanker pose env cybersec humanoid circuit shiori extension atari breakout atari breakout preprocessing bench raijin biped arm training graph biped arm yuri"
+    "content": "Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor Cybersec OpenEnv Raijin LOB benchmarks Project Halide workbench Humanoid circuit Biped arm simulation Biped arm result Biped arm training graph Clanker pose Shiori extension Atari Breakout Breakout preprocessing Damaged 35mm negative"
+  },
+  {
+    "type": "page",
+    "title": "Subdomains & Live Apps",
+    "summary": "Deployed apps, documentation sites, and live demos.",
+    "url": "/apps",
+    "content": "Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
   },
   {
     "type": "updates",
@@ -67,7 +74,7 @@
     "url": "/articles/2026-07-22-syntagma",
     "date": "2026-07-22",
     "tags": [],
-    "content": "Syntagma replaces a completely manual process at PES University. Faculty submit course content in raw, inconsistent formats. Someone manually compiles it into the official syllabus document. No version history, no way to compare changes between years. The entire pipeline is now automated end-to-end. Links: - Live demo: syntagma.lonelyguy.tech - Source: github.com/LonelyGuy-SE1/Syntagma - Docs: syntagma.lonelyguy.tech/docs/ System Architecture +------------------------------------------+ | Vercel (Static Frontend) | | /auth/ /form/ /courses/ /live-editor/ | | /preview/ /versions/ /docs/ | +-------------------+----------------------+ | /api/* +-------------------v----------------------+ | Hugging Face Spaces (Docker) | | FastAPI + Uvicorn | | 51 endpoints / 9 route files | +--+--------+--------+--------+-----------+ | | | | +----------v+ +----v-----+ +-v--------+ +--v---------+ | Supabase | | Upstash | | Agent | | WeasyPrint | | PostgreSQL | | Redis | | (36 tools)| | A4 PDF | | 12 tables | | + memory | | SSE stream| | Jinja2 tmpl| +------------+ +----------+ +----------+ +------------+ Frontend Surfaces The application has 8 frontend routes, all vanilla HTML/CSS/JS served as static files from Vercel. API calls are proxied through Vercel rewrites to the Docker backend on Hugging Face Spaces with CORS middleware handling the bridge. Dashboard at the root route shows a navigation grid and academic year selector. Each route is a standalone HTML file with its own CSS and JS, no framework overhead. Course Submission Faculty enter a course code, title, and raw course content. The backend auto-parses course codes: UE25CS242B is decomposed into semester 4, CS department, credit category 2, target department CSE. Background tasks trigger agent refinement without blocking the response. Course Management The courses table supports semester and visibility filters, visibility toggles (show/hide from curriculum without deletion), and soft-delete via archival. All mutations invalidate the relevant cache keys to maintain consistency. The Agentic Editor This is the core architectural piece. The editor surfaces three panels: Chat panel -- SSE-streaming conversation with the agent. The agent receives a system prompt that encodes curriculum rules (credit categories, course code conventions, unit hour requirements, specialization track structure) plus the active course context. Fields panel -- Direct JSON field editing for quick manual adjustments. Review panel -- Lists proposed drafts with diff summaries, change reasons, and apply/block actions. The critical rule: the agent never auto-applies changes. Every proposed edit creates a row in agent_drafts with status proposed . The human must review and explicitly apply it. Fields tagged as deterministic (program, hours, credits, course_type) create blocked drafts that require extra confirmation. This is enforced at every level of the tool chain. The Tool System 36 tools registered as a frozen dataclass registry. Each tool has a name, description, JSON Schema parameters (for LLM function calling), and a handler function. The tool listing is exposed at GET /api/agent/tools . Read tools (10): granular course access from lightweight identifiers ( get_course_codes ) to full JSON ( get_current_course_json ), with targeted field subsets ( get_course_syllabus , get_course_textbooks , get_course_lab , get_course_deterministic , get_course_fields ) and batch operations ( batch_read_courses ). Write tools (6): create_course_draft (single course, reviewable), create_document_draft (multi-course), create_refined_course (new courses or draft-status updates), update_agent_draft (modify existing draft), update_deterministic_fields (blocked draft for protected fields), create_curriculum_version (named snapshot). Diff tools (3): diff_course_json (JSON Patch + syllabus change percent), diff_versions (added/removed/changed courses between snapshots), get_version (load snapshot). Specialization tools (7): define_specialization , list_specializations , assign_elective_to_tracks , remove_elective_from_tracks , get_course_assignments , categorize_elective (AI-driven track assignment). External tools (3): fetch_url , web_search (DuckDuckGo), get_attachment_text (PDF/DOCX/XLSX/TXT text extraction). Output tools (2): create_report (markdown or PDF saved as chat attachment), create_spreadsheet (CSV or XLSX from structured row data). Meta tools (4): signal_done (end turn with summary), ask_user (request clarification), list_courses , get_preview_url . The tool chain supports complex permutations: the agent can batch-read courses, generate a spreadsheet, research web sources, create document-level drafts across multiple courses, and snapshot a version -- all in a single turn. The type system (frozen dataclass, typed JSON Schema) keeps tool definitions inspectable and parseable by any OpenAI-compatible function-calling API. PDF Pipeline PDFs are generated through Jinja2 templates rendered by WeasyPrint. There are 4 template variants: jinja_sample.html -- Single course, semester, or full curriculum with summary tables jinja_diff.html -- Red/green side-by-side diff view jinja_program.html -- Program educational objectives and outcomes jinja_sem_5_6.html -- Specialization track brackets The PES University letterhead is base64-encoded directly in _logo_data.py and embedded into every PDF. Download options cover single course, per-semester, and full curriculum, each with inline preview and attachment download modes. A background thread pre-generates PDFs at startup to avoid cold-start latency on the first request. Version Control System The versioning system is modeled on the same underlying architecture as git -- for curriculum data. curriculum_versions stores named snapshots. finalized_submissions stores a course_json snapshot for every course at version creation time. Key behaviors: - Version creation detects no-change and returns 409 Conflict - Version restore writes to course_revision_history and archives courses removed since the snapshot - Version-vs-version diff via GET /versions/{v1}/diff/{v2} returns added, removed, and changed courses with per-course change percentages - Applying a draft auto-creates a version snapshot with a conventional-commit-style name derived from the diff summary ( Apply: updated UE25CS242B syllabus (+3 topics, syllabus:25%) ) - Cache invalidation fires on every version mutation Database Schema 12 tables in Supabase PostgreSQL: Table Purpose submissions Raw faculty input with status lifecycle: pending -&gt; refined / refine_failed refined_submissions Template-ready courses, 22 columns including JSONB units specialization_definitions Track definitions per semester (letter, name, key) course_specialization_assignments Many-to-many elective-to-track mapping curriculum_versions Named snapshots with program and academic year finalized_submissions Course JSON snapshots per version course_revision_history Audit trail: previous, next, JSON Patch, diff summary agent_drafts Proposed/blocked/applied lifecycle agent_document_drafts Multi-course drafts chat_sessions Chat scoped to course or document draft chat_messages Messages with metadata (tool calls, attachments) chat_attachments Uploaded files and generated reports with text extraction Relationships cascade on delete through foreign keys. The schema is self-documenting via GET /api/health/schema which checks all 12 tables exist with the correct columns. Caching Layer The cache module ( cache.py , 134 lines) wraps Upstash Redis with automatic in-memory fallback behind a unified interface. If Redis is unreachable, it degrades silently to a thread-safe dict with TTL-based expiration. Lazy invalidation uses a prefix-based pattern: a course visibility change invalidates courses_list , sem_courses: , pending_courses , all_course_ids , and the full curriculum cache. Version operations invalidate versions_list and ver_preview: . A cache prewarm thread runs at FastAPI startup to populate all_course_ids . Key Design Decisions Vanilla frontend, zero build step. Every page is a standalone HTML file with its own CSS and JS. No React, no Vue, no webpack. The backend mounts the frontend directory as a static file server. For a tool used by a small number of curriculum administrators, the overhead of a modern SPA framework is unjustified. No async task queue. Celery was considered and rejected because the requirements specified a small user base. Background refinement runs in FastAPI BackgroundTasks . PDF pre-generation runs in a daemon thread at startup. Both are synchronous and fast enough for the expected concurrency. Agent-agnostic AI pipeline. The agent system accepts any OpenAI-compatible API endpoint. The model, URL, and fallback model are all environment-configurable. The system prompt encodes curriculum-specific rules that are independent of any particular model. Drafts as first-class entities. Every change goes through agent_drafts , gets a diff_summary (JSON Patch + syllabus change percent + topic add/remove lists), and waits for human approval. This was the single most important architectural constraint. It makes the agent a proposal tool, not an autonomous actor. The draft lifecycle (proposed -&gt; applied, or blocked if deterministic fields are touched) is enforced at every level of the tool system."
+    "content": "Syntagma replaces a completely manual process at PES University. Faculty submit course content in raw, inconsistent formats. Someone manually compiles it into the official syllabus document. No version history, no way to compare changes between years. The entire pipeline is now automated end-to-end. Links: - Live demo: syntagma.lonelyguy.tech - Source: github.com/LonelyGuy-SE1/Syntagma - Docs: syntagma.lonelyguy.tech/docs/ System Architecture flowchart TB subgraph Frontend[\"Frontend (Vanilla HTML/CSS/JS)\"] Auth[\"/auth/ Sign In\"] Dashboard[\"/ Dashboard\"] Form[\"/form/ Course Submission\"] Courses[\"/courses/ Course Management\"] Preview[\"/preview/ PDF Preview\"] Editor[\"/live-editor/ Agentic Editor\"] Versions[\"/versions/ Version History\"] end subgraph Backend[\"FastAPI Backend (/api)\"] direction TB SubAPI[\"Submissions\"] CoursesAPI[\"Courses\"] PreviewAPI[\"Preview (8 endpoints)\"] AgentAPI[\"Agent (13 endpoints)\"] ChatAPI[\"Chat (SSE streaming)\"] VersionsAPI[\"Versions (10 endpoints)\"] end subgraph Services[\"Services Layer\"] Refinement[\"Refinement - LLM content extraction\"] AgentTools[\"Agent Tools - 35 tools\"] Diffing[\"Diffing - protected field validation\"] Curriculum[\"Curriculum - sorting, snapshots\"] PreviewSvc[\"Preview - build_course_preview\"] Rendering[\"Rendering - Jinja2 + WeasyPrint\"] Cache[\"Cache - Redis + in-memory\"] end subgraph External[\"External Services\"] LLM[\"OpenRouter - Primary + Fallback\"] Redis[(\"Upstash Redis\")] Supa[(Supabase Postgres)] WeasyPrint[\"WeasyPrint - A4 PDF\"] end Auth -->|\"JWT\"| Dashboard Dashboard --> Form & Courses & Preview & Editor & Versions Form -->|\"POST /submissions\"| SubAPI SubAPI --> Refinement Refinement -->|\"extract content\"| LLM Refinement -->|\"store\"| Supa Courses --> CoursesAPI CoursesAPI --> Cache Cache -.-|\"miss\"| Supa Preview --> PreviewAPI PreviewAPI --> PreviewSvc PreviewSvc --> Rendering Rendering --> WeasyPrint Editor -->|\"SSE\"| ChatAPI ChatAPI --> LLM LLM -->|\"tool calls\"| AgentTools AgentTools --> Supa ChatAPI -->|\"save\"| Supa VersionsAPI --> Curriculum Curriculum -->|\"snapshot\"| Supa Editor -->|\"review/apply\"| AgentAPI AgentAPI --> Diffing Diffing -->|\"validate\"| Supa Cache -.- Redis Frontend Surfaces The application has 8 frontend routes, all vanilla HTML/CSS/JS served as static files from Vercel. API calls are proxied through Vercel rewrites to the Docker backend on Hugging Face Spaces with CORS middleware handling the bridge. Dashboard at the root route shows a navigation grid and academic year selector. Each route is a standalone HTML file with its own CSS and JS, no framework overhead. Course Submission Faculty enter a course code, title, and raw course content. The backend auto-parses course codes: UE25CS242B is decomposed into semester 4, CS department, credit category 2, target department CSE. Background tasks trigger agent refinement without blocking the response. Course Management The courses table supports semester and visibility filters, visibility toggles (show/hide from curriculum without deletion), and soft-delete via archival. All mutations invalidate the relevant cache keys to maintain consistency. The Agentic Editor This is the core architectural piece. The editor surfaces three panels: Panel Description Chat SSE-streaming conversation with the agent. System prompt encodes curriculum rules, course code conventions, unit hour requirements, and specialization track structure. Fields Direct JSON field editing for quick manual adjustments. Review Lists proposed drafts with diff summaries, change reasons, and apply/block actions. The critical rule: the agent never auto-applies changes. Every proposed edit creates a row in agent_drafts with status proposed . The human must review and explicitly apply it. Fields tagged as deterministic (program, hours, credits, course_type) create blocked drafts that require extra confirmation. This is enforced at every level of the tool chain. The Tool System 36 tools registered as a frozen dataclass registry. Each tool has a name, description, JSON Schema parameters (for LLM function calling), and a handler function. The tool listing is exposed at GET /api/agent/tools . Category Count Tools Read 10 get_course_codes , get_current_course_json , get_course_syllabus , get_course_textbooks , get_course_lab , get_course_deterministic , get_course_fields , batch_read_courses Write 6 create_course_draft , create_document_draft , create_refined_course , update_agent_draft , update_deterministic_fields , create_curriculum_version Diff 3 diff_course_json , diff_versions , get_version Specialization 7 define_specialization , list_specializations , assign_elective_to_tracks , remove_elective_from_tracks , get_course_assignments , categorize_elective External 3 fetch_url , web_search , get_attachment_text Output 2 create_report , create_spreadsheet Meta 4 signal_done , ask_user , list_courses , get_preview_url The tool chain supports complex permutations: the agent can batch-read courses, generate a spreadsheet, research web sources, create document-level drafts across multiple courses, and snapshot a version, all in a single turn. The type system (frozen dataclass, typed JSON Schema) keeps tool definitions inspectable and parseable by any OpenAI-compatible function-calling API. PDF Pipeline PDFs are generated through Jinja2 templates rendered by WeasyPrint. There are 4 template variants: Template Purpose jinja_sample.html Single course, semester, or full curriculum with summary tables jinja_diff.html Red/green side-by-side diff view jinja_program.html Program educational objectives and outcomes jinja_sem_5_6.html Specialization track brackets The PES University letterhead is base64-encoded directly in _logo_data.py and embedded into every PDF. Download options cover single course, per-semester, and full curriculum, each with inline preview and attachment download modes. A background thread pre-generates PDFs at startup to avoid cold-start latency on the first request. Version Control System The versioning system is modeled on the same underlying architecture as git, for curriculum data. curriculum_versions stores named snapshots. finalized_submissions stores a course_json snapshot for every course at version creation time. Behavior Detail No-change detection Returns 409 Conflict if nothing changed Version restore Writes to course_revision_history , archives removed courses Version diff GET /versions/{v1}/diff/{v2} returns added/removed/changed with percentages Auto-snapshot Applying a draft creates a conventional-commit-style version name Cache invalidation Fires on every version mutation Database Schema 12 tables in Supabase PostgreSQL: Table Purpose submissions Raw faculty input with status lifecycle: pending -&gt; refined / refine_failed refined_submissions Template-ready courses, 22 columns including JSONB units specialization_definitions Track definitions per semester (letter, name, key) course_specialization_assignments Many-to-many elective-to-track mapping curriculum_versions Named snapshots with program and academic year finalized_submissions Course JSON snapshots per version course_revision_history Audit trail: previous, next, JSON Patch, diff summary agent_drafts Proposed/blocked/applied lifecycle agent_document_drafts Multi-course drafts chat_sessions Chat scoped to course or document draft chat_messages Messages with metadata (tool calls, attachments) chat_attachments Uploaded files and generated reports with text extraction Relationships cascade on delete through foreign keys. The schema is self-documenting via GET /api/health/schema which checks all 12 tables exist with the correct columns. Caching Layer The cache module ( cache.py , 134 lines) wraps Upstash Redis with automatic in-memory fallback behind a unified interface. If Redis is unreachable, it degrades silently to a thread-safe dict with TTL-based expiration. Lazy invalidation uses a prefix-based pattern: a course visibility change invalidates courses_list , sem_courses: , pending_courses , all_course_ids , and the full curriculum cache. Version operations invalidate versions_list and ver_preview: . A cache prewarm thread runs at FastAPI startup to populate all_course_ids . Key Design Decisions Vanilla frontend, zero build step. Every page is a standalone HTML file with its own CSS and JS. No React, no Vue, no webpack. The backend mounts the frontend directory as a static file server. For a tool used by a small number of curriculum administrators, the overhead of a modern SPA framework is unjustified. No async task queue. Celery was considered and rejected because the requirements specified a small user base. Background refinement runs in FastAPI BackgroundTasks . PDF pre-generation runs in a daemon thread at startup. Both are synchronous and fast enough for the expected concurrency. Agent-agnostic AI pipeline. The agent system accepts any OpenAI-compatible API endpoint. The model, URL, and fallback model are all environment-configurable. The system prompt encodes curriculum-specific rules that are independent of any particular model. Drafts as first-class entities. Every change goes through agent_drafts , gets a diff_summary (JSON Patch + syllabus change percent + topic add/remove lists), and waits for human approval. This was the single most important architectural constraint. It makes the agent a proposal tool, not an autonomous actor. The draft lifecycle (proposed -&gt; applied, or blocked if deterministic fields are touched) is enforced at every level of the tool system."
   },
   {
     "type": "articles",
@@ -164,191 +171,154 @@
   },
   {
     "type": "gallery",
-    "title": "syntagma versions_default",
-    "summary": "syntagma versions_default",
-    "url": "/gallery",
-    "content": "gallery/syntagma.versions_default.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma versions_rename_category",
-    "summary": "syntagma versions_rename_category",
-    "url": "/gallery",
-    "content": "gallery/syntagma.versions_rename_category.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma versions_current_document",
-    "summary": "syntagma versions_current_document",
-    "url": "/gallery",
-    "content": "gallery/syntagma.versions_current_document.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma versions_annotated_comparision",
-    "summary": "syntagma versions_annotated_comparision",
+    "title": "Version comparison diff",
+    "summary": "Side-by-side version comparison diff",
     "url": "/gallery",
     "content": "gallery/syntagma.versions_annotated_comparision.png"
   },
   {
     "type": "gallery",
-    "title": "syntagma submit_course_page",
-    "summary": "syntagma submit_course_page",
-    "url": "/gallery",
-    "content": "gallery/syntagma.submit_course_page.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma preview_single_course",
-    "summary": "syntagma preview_single_course",
-    "url": "/gallery",
-    "content": "gallery/syntagma.preview_single_course.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma preview_full_sem",
-    "summary": "syntagma preview_full_sem",
-    "url": "/gallery",
-    "content": "gallery/syntagma.preview_full_sem.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma preview_full_doc",
-    "summary": "syntagma preview_full_doc",
+    "title": "Curriculum PDF preview",
+    "summary": "Full curriculum PDF preview",
     "url": "/gallery",
     "content": "gallery/syntagma.preview_full_doc.png"
   },
   {
     "type": "gallery",
-    "title": "syntagma home_page",
-    "summary": "syntagma home_page",
+    "title": "Syntagma dashboard",
+    "summary": "Syntagma dashboard",
     "url": "/gallery",
     "content": "gallery/syntagma.home_page.png"
   },
   {
     "type": "gallery",
-    "title": "syntagma editor_single_course",
-    "summary": "syntagma editor_single_course",
-    "url": "/gallery",
-    "content": "gallery/syntagma.editor_single_course.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma editor_sample_annotated",
-    "summary": "syntagma editor_sample_annotated",
+    "title": "Syntagma agentic editor",
+    "summary": "Agentic editor with chat, fields panel, and draft review",
     "url": "/gallery",
     "content": "gallery/syntagma.editor_sample_annotated.png"
   },
   {
     "type": "gallery",
-    "title": "syntagma editor_sample_1",
-    "summary": "syntagma editor_sample_1",
-    "url": "/gallery",
-    "content": "gallery/syntagma.editor_sample_1.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma courses_filtered_visible_toggle",
-    "summary": "syntagma courses_filtered_visible_toggle",
-    "url": "/gallery",
-    "content": "gallery/syntagma.courses_filtered_visible_toggle.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma courses_delete_modal",
-    "summary": "syntagma courses_delete_modal",
-    "url": "/gallery",
-    "content": "gallery/syntagma.courses_delete_modal.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma courses_default",
-    "summary": "syntagma courses_default",
-    "url": "/gallery",
-    "content": "gallery/syntagma.courses_default.png"
-  },
-  {
-    "type": "gallery",
-    "title": "syntagma auth_page",
-    "summary": "syntagma auth_page",
-    "url": "/gallery",
-    "content": "gallery/syntagma.auth_page.png"
-  },
-  {
-    "type": "gallery",
-    "title": "biped arm result",
-    "summary": "biped arm result",
-    "url": "/gallery",
-    "content": "gallery/biped.arm.result.png"
-  },
-  {
-    "type": "gallery",
-    "title": "clanker pose",
-    "summary": "clanker pose",
-    "url": "/gallery",
-    "content": "gallery/clanker.pose.png"
-  },
-  {
-    "type": "gallery",
-    "title": "env cybersec",
-    "summary": "env cybersec",
+    "title": "Cybersec OpenEnv",
+    "summary": "Cybersec OpenEnv environment visualization",
     "url": "/gallery",
     "content": "gallery/env.cybersec.png"
   },
   {
     "type": "gallery",
-    "title": "humanoid circuit",
-    "summary": "humanoid circuit",
-    "url": "/gallery",
-    "content": "gallery/humanoid.circuit.png"
-  },
-  {
-    "type": "gallery",
-    "title": "shiori extension",
-    "summary": "shiori extension",
-    "url": "/gallery",
-    "content": "gallery/shiori.extension.png"
-  },
-  {
-    "type": "gallery",
-    "title": "atari breakout",
-    "summary": "atari breakout",
-    "url": "/gallery",
-    "content": "gallery/atari.breakout.png"
-  },
-  {
-    "type": "gallery",
-    "title": "atari breakout preprocessing",
-    "summary": "atari breakout preprocessing",
-    "url": "/gallery",
-    "content": "gallery/atari.breakout.preprocessing.png"
-  },
-  {
-    "type": "gallery",
-    "title": "bench raijin",
-    "summary": "bench raijin",
+    "title": "Raijin LOB benchmarks",
+    "summary": "Raijin LOB benchmark brief",
     "url": "/gallery",
     "content": "gallery/bench.raijin.png"
   },
   {
     "type": "gallery",
-    "title": "biped arm training graph",
-    "summary": "biped arm training graph",
+    "title": "Project Halide workbench",
+    "summary": "Project Halide diagnostic workbench interface",
     "url": "/gallery",
-    "content": "gallery/biped.arm.graph.png"
+    "content": "assets/halide/halide-app.png"
   },
   {
     "type": "gallery",
-    "title": "biped arm",
-    "summary": "biped arm",
+    "title": "Humanoid circuit",
+    "summary": "Humanoid robot circuit design",
+    "url": "/gallery",
+    "content": "gallery/humanoid.circuit.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Biped arm simulation",
+    "summary": "Bipedal robot arm simulation",
     "url": "/gallery",
     "content": "gallery/biped.arm.png"
   },
   {
     "type": "gallery",
-    "title": "yuri",
-    "summary": "yuri",
+    "title": "Biped arm result",
+    "summary": "Bipedal robot arm training result",
     "url": "/gallery",
-    "content": "gallery/yuri.png"
+    "content": "gallery/biped.arm.result.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Biped arm training graph",
+    "summary": "Bipedal robot arm training graph",
+    "url": "/gallery",
+    "content": "gallery/biped.arm.graph.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Clanker pose",
+    "summary": "Clanker robot pose estimation",
+    "url": "/gallery",
+    "content": "gallery/clanker.pose.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Shiori extension",
+    "summary": "Shiori robot extension mechanism",
+    "url": "/gallery",
+    "content": "gallery/shiori.extension.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Atari Breakout",
+    "summary": "Atari Breakout game frame",
+    "url": "/gallery",
+    "content": "gallery/atari.breakout.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Breakout preprocessing",
+    "summary": "Preprocessed Breakout observation frame",
+    "url": "/gallery",
+    "content": "gallery/atari.breakout.preprocessing.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Damaged 35mm negative",
+    "summary": "Damaged 35mm negative used to evaluate Project Halide",
+    "url": "/gallery",
+    "content": "assets/halide/real-35mm-negative-banner.jpg"
+  },
+  {
+    "type": "apps",
+    "title": "Syntagma",
+    "summary": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
+    "url": "/apps",
+    "tags": [
+      "demo"
+    ],
+    "content": ""
+  },
+  {
+    "type": "apps",
+    "title": "Project Halide",
+    "summary": "Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.",
+    "url": "/apps",
+    "tags": [
+      "demo"
+    ],
+    "content": ""
+  },
+  {
+    "type": "apps",
+    "title": "Cybersec OpenEnv",
+    "summary": "Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.",
+    "url": "/apps",
+    "tags": [
+      "demo"
+    ],
+    "content": ""
+  },
+  {
+    "type": "apps",
+    "title": "Raijin LOB",
+    "summary": "Documentation and public benchmarks for the C++ limit order book engine.",
+    "url": "/apps",
+    "tags": [
+      "docs"
+    ],
+    "content": ""
   }
 ]
