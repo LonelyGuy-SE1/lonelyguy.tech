@@ -7,6 +7,7 @@ const sharp = require("sharp");
 const ROOT = path.resolve(__dirname, "..");
 const CONFIG_PATH = path.join(ROOT, "site.config.json");
 const PROJECTS_JSON = path.join(ROOT, "projects.json");
+const LIVE_APPS_JSON = path.join(ROOT, "live-apps.json");
 const CONTENT_JS = path.join(__dirname, "content.js");
 const BUILD_DIR = path.join(ROOT, "assets", "build");
 const SEARCH_INDEX_JSON = path.join(ROOT, "search-index.json");
@@ -18,6 +19,7 @@ const COLLECTION_DIRS = {
 };
 
 const GALLERY_DIR = path.join(ROOT, "gallery");
+const GALLERY_JSON = path.join(ROOT, "gallery.json");
 
 const STATIC_PAGES = [
   {
@@ -243,18 +245,44 @@ function extractYouTubeIdsFromHtml(html) {
 }
 
 function markdownToHtml(markdown) {
-  const blocks = normalizeLineEndings(markdown)
+  const normalized = normalizeLineEndings(markdown);
+  
+  // First pass: extract multi-line code blocks (including mermaid) before splitting
+  const codeBlocks = [];
+  let processed = normalized.replace(/```(\w*)\n([\s\S]*?)```/g, function(match, lang, code) {
+    const index = codeBlocks.length;
+    codeBlocks.push({ lang: lang.toLowerCase(), code: code.replace(/\n$/, "") });
+    return "\n\n%%CODE_BLOCK_" + index + "%%\n\n";
+  });
+
+  const blocks = processed
     .split(/\n{2,}/)
     .map((b) => b.trim())
     .filter(Boolean);
 
   return blocks
     .map((block) => {
+      // Restore extracted code blocks
+      const codeBlockMatch = block.match(/^%%CODE_BLOCK_(\d+)%%$/);
+      if (codeBlockMatch) {
+        const index = parseInt(codeBlockMatch[1], 10);
+        const { lang, code } = codeBlocks[index];
+        if (lang === "mermaid") {
+          return `<div class="mermaid">${code}</div>`;
+        }
+        return `<pre><code>${escapeHtml(code)}</code></pre>`;
+      }
+
       const youtubeMatch = block.match(/^\{%\s*youtube\s+([^%]+?)\s*%\}$/i);
       if (youtubeMatch) return youtubeEmbedHtml(youtubeMatch[1]);
 
       if (block.startsWith("```") && block.endsWith("```")) {
+        const langMatch = block.match(/^```(\w+)/);
+        const lang = langMatch ? langMatch[1].toLowerCase() : "";
         const code = block.replace(/^```[\w-]*\n?/, "").replace(/\n?```$/, "");
+        if (lang === "mermaid") {
+          return `<div class="mermaid">${code}</div>`;
+        }
         return `<pre><code>${escapeHtml(code)}</code></pre>`;
       }
 
@@ -389,16 +417,32 @@ function readingTime(markdownBody) {
   return Math.max(1, Math.ceil(words / 220));
 }
 
+function imageFileValid(publicPath) {
+  if (!publicPath || /^https?:\/\//i.test(publicPath)) return true;
+  const filePath = path.join(ROOT, publicPath.replace(/^\/+/, ""));
+  try {
+    const stat = fsSync.statSync(filePath);
+    return stat.size > 0;
+  } catch {
+    return false;
+  }
+}
+
 function toPictureHtml(html) {
   return html.replace(
     /<img src="((?:gallery|assets)\/[^"]+?)\.(png|jpe?g)" alt="([^"]*?)"(.*?)>/gi,
     (match, assetPath, ext, alt, extra) => {
-      const rootPath = toRootPath(`${assetPath}.${ext}`);
+      const srcPath = `${assetPath}.${ext}`;
+      if (!imageFileValid(srcPath)) return "";
+      const rootPath = toRootPath(srcPath);
       const avif = toRootPath(`${assetPath}.avif`);
       const webp = toRootPath(`${assetPath}.webp`);
       const attrs = /loading=/.test(extra) ? extra : `${extra} loading="lazy"`;
       const decoded = /decoding=/.test(attrs) ? attrs : `${attrs} decoding="async"`;
-      return `<picture><source srcset="${avif}" type="image/avif"><source srcset="${webp}" type="image/webp"><img src="${rootPath}" alt="${alt}"${decoded}></picture>`;
+      const sources = [];
+      if (imageFileValid(`${assetPath}.avif`)) sources.push(`<source srcset="${avif}" type="image/avif">`);
+      if (imageFileValid(`${assetPath}.webp`)) sources.push(`<source srcset="${webp}" type="image/webp">`);
+      return `<picture>${sources.join("")}<img src="${rootPath}" alt="${alt}"${decoded}></picture>`;
     },
   );
 }
@@ -552,31 +596,33 @@ function altFromFilename(filename) {
 }
 
 async function readGallery() {
-  const entries = await fs
-    .readdir(GALLERY_DIR, { withFileTypes: true })
-    .catch(() => []);
-  const images = entries.filter((e) => {
-    if (!e.isFile() || e.name.startsWith(".")) return false;
-    const ext = path.extname(e.name).toLowerCase();
-    return (
-      ext !== ".webp" &&
-      ext !== ".avif" &&
-      [".png", ".jpg", ".jpeg", ".gif"].includes(ext)
-    );
-  });
+  let entries = [];
+  try {
+    entries = JSON.parse(await fs.readFile(GALLERY_JSON, "utf8"));
+  } catch {
+    entries = [];
+  }
   const records = await Promise.all(
-    images.map(async (entry) => {
-      const fullPath = path.join(GALLERY_DIR, entry.name);
-      const stats = await fs.stat(fullPath);
-      const publicPath = `gallery/${encodeURIComponent(entry.name)}`;
-      return {
-        url: publicPath,
-        alt: altFromFilename(entry.name),
-        caption: altFromFilename(entry.name),
-        date: stats.mtime.toISOString(),
-        imageMeta: await imageMetadata(publicPath),
-      };
-    }),
+    entries
+      .filter((entry) => entry && entry.url)
+      .map(async (entry) => {
+        const publicPath = entry.url.replace(/^\/+/, "");
+        const filePath = path.join(ROOT, publicPath);
+        let date = "";
+        try {
+          const stats = await fs.stat(filePath);
+          date = stats.mtime.toISOString();
+        } catch {
+          date = new Date().toISOString();
+        }
+        return {
+          url: publicPath,
+          alt: entry.alt || altFromFilename(path.basename(publicPath)),
+          caption: entry.caption || entry.alt || altFromFilename(path.basename(publicPath)),
+          date,
+          imageMeta: await imageMetadata(publicPath),
+        };
+      }),
   );
   return records.sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -646,6 +692,31 @@ async function readProjects() {
     if (a.featured !== b.featured) return a.featured ? -1 : 1;
     return b.updated.localeCompare(a.updated);
   });
+}
+
+async function readLiveApps() {
+  let entries = [];
+  try {
+    entries = JSON.parse(await fs.readFile(LIVE_APPS_JSON, "utf8"));
+  } catch {
+    entries = [];
+  }
+  return entries
+    .filter((entry) => entry && entry.title && entry.url)
+    .map((entry) => {
+      const image = normalizeAssetUrl(entry.image || "");
+      const links = Array.isArray(entry.links)
+        ? entry.links.filter((l) => l && l.label && l.url).map((l) => ({ label: l.label, url: l.url }))
+        : [];
+      return {
+        title: entry.title,
+        url: entry.url,
+        type: entry.type || "link",
+        description: entry.description || "",
+        image,
+        links,
+      };
+    });
 }
 
 function analyticsScripts(config) {
@@ -796,6 +867,7 @@ function headerHtml(activePath = "") {
     ["/articles", "articles", "blogs"],
     ["/gallery", "gallery", "gallery"],
     ["/projects", "projects", "projects"],
+    ["/apps", "apps", "live apps"],
     ["/contact", "contact", "contact"],
   ];
   const active = links.find(([href]) => activePath === href);
@@ -994,6 +1066,10 @@ function makeArticlePageHtml(config, assets, record, type) {
         ${renderTagList(record.tags)}
         <div class="reader-body">${toRootRelativePaths(record.html)}</div>
       </article>`;
+  const hasMermaid = /class="mermaid"/.test(record.html);
+  const mermaidScript = hasMermaid
+    ? `<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" onload="mermaid.initialize({startOnLoad:false,theme:'dark',themeVariables:{primaryColor:'#ff6b35',primaryTextColor:'#ff6b35',lineColor:'#ff6b35',secondaryColor:'#0e0403',tertiaryColor:'#000100'}});document.querySelectorAll('.mermaid').forEach(function(el){mermaid.run({nodes:[el]});});"></script>`
+    : "";
   return shell(
     config,
     assets,
@@ -1010,6 +1086,7 @@ function makeArticlePageHtml(config, assets, record, type) {
     },
     body,
     jsonLd,
+    mermaidScript,
   );
 }
 
@@ -1025,17 +1102,27 @@ function projectLinks(record) {
 
 function projectMediaHtml(record) {
   if (!record.images?.length) return "";
-  return `<div class="project-media-grid">${record.images
+  const figures = record.images
     .map((image) => {
       const src = normalizeAssetUrl(image.src);
+      if (!imageFileValid(src)) return "";
       const root = toRootPath(src);
       const base = root.replace(/\.(png|jpe?g)$/i, "");
-      const picture = /\.(png|jpe?g)$/i.test(root)
-        ? `<picture><source srcset="${base}.avif" type="image/avif"><source srcset="${base}.webp" type="image/webp"><img src="${root}" alt="${escapeAttr(image.alt || record.title)}" loading="lazy" decoding="async"></picture>`
-        : `<img src="${escapeAttr(src)}" alt="${escapeAttr(image.alt || record.title)}" loading="lazy" decoding="async">`;
+      let picture;
+      if (/\.(png|jpe?g)$/i.test(root)) {
+        const sources = [];
+        if (imageFileValid(base + ".avif")) sources.push(`<source srcset="${base}.avif" type="image/avif">`);
+        if (imageFileValid(base + ".webp")) sources.push(`<source srcset="${base}.webp" type="image/webp">`);
+        picture = `<picture>${sources.join("")}<img src="${root}" alt="${escapeAttr(image.alt || record.title)}" loading="lazy" decoding="async"></picture>`;
+      } else {
+        picture = `<img src="${escapeAttr(src)}" alt="${escapeAttr(image.alt || record.title)}" loading="lazy" decoding="async">`;
+      }
       return `<figure>${picture}<figcaption>${escapeHtml(image.alt || record.title)}</figcaption></figure>`;
     })
-    .join("")}</div>`;
+    .filter(Boolean)
+    .join("");
+  if (!figures) return "";
+  return `<div class="project-media-grid">${figures}</div>`;
 }
 
 function shieldsBadgeUrl(item) {
@@ -1380,6 +1467,68 @@ function makeCollectionPageHtml(config, assets, type, title, description, record
   );
 }
 
+function makeAppsPageHtml(config, assets, liveApps) {
+  const url = collectionUrl(config, "apps");
+  const typeLabels = { demo: "demo", docs: "docs", link: "link" };
+  const cards = liveApps.length
+    ? liveApps
+        .map((app) => {
+          let picture = "";
+          if (app.image) {
+            const src = normalizeAssetUrl(app.image);
+            if (/\.(png|jpe?g|gif)$/i.test(src) && imageFileValid(src)) {
+              const root = toRootPath(src);
+              const base = root.replace(/\.(png|jpe?g|gif)$/i, "");
+              const sources = [];
+              if (imageFileValid(base + ".avif")) sources.push(`<source srcset="${base}.avif" type="image/avif">`);
+              if (imageFileValid(base + ".webp")) sources.push(`<source srcset="${base}.webp" type="image/webp">`);
+              picture = `<div class="app-card-preview"><picture>${sources.join("")}<img src="${root}" alt="${escapeAttr(app.title)}" loading="lazy" decoding="async"></picture><span class="app-card-type app-card-type--${escapeAttr(app.type || "link")}">${escapeHtml(typeLabels[app.type] || app.type || "link")}</span></div>`;
+            } else if (/^https?:\/\//i.test(src)) {
+              picture = `<div class="app-card-preview"><img src="${escapeAttr(src)}" alt="${escapeAttr(app.title)}" loading="lazy" decoding="async"><span class="app-card-type app-card-type--${escapeAttr(app.type || "link")}">${escapeHtml(typeLabels[app.type] || app.type || "link")}</span></div>`;
+            }
+          }
+          return `<article class="app-card"><a class="app-card-link" href="${escapeAttr(app.url)}" target="_blank" rel="noopener noreferrer">${picture}<div class="app-card-body"><strong class="app-card-title">${escapeHtml(app.title)}</strong><span class="app-card-desc">${escapeHtml(app.description || "")}</span><span class="app-card-visit">visit</span></div></a></article>`;
+        })
+        .join("")
+    : '<p class="dynamic-note">No live apps added yet.</p>';
+  const jsonLd = [
+    {
+      "@type": "CollectionPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: "Subdomains & Live Apps",
+      description: "Deployed apps, documentation sites, and live demos from Lonely Guy.",
+      isPartOf: { "@id": `${config.baseUrl}/#website` },
+      about: { "@id": `${config.baseUrl}/#person` },
+    },
+    itemListJsonLd(
+      liveApps.map((a) => ({ name: a.title, url: a.url })),
+    ),
+    breadcrumbsJsonLd(config, [
+      { name: "Home", url: canonicalUrl(config, "/") },
+      { name: "Live Apps", url },
+    ]),
+  ];
+  const body = `<article>
+        <div class="reader-head">
+          <div>
+            <p class="reader-kicker">live apps</p>
+            <h1>Subdomains &amp; Live Apps</h1>
+          </div>
+          ${renderLinkPills([{ label: "home", href: "/" }])}
+        </div>
+        <p class="static-page-summary">Deployed applications, documentation sites, and live demos across various subdomains and hosting platforms.</p>
+        <div class="apps-grid">${cards}</div>
+      </article>`;
+  return shell(
+    config,
+    assets,
+    { path: canonicalPath("apps"), title: "Subdomains & Live Apps", description: "Deployed apps, documentation sites, and live demos from Lonely Guy.", spaRedirect: "/?t=apps" },
+    body,
+    jsonLd,
+  );
+}
+
 function makeStaticInfoPage(config, assets, page) {
   const url = canonicalUrl(config, page.path);
   let bodyContent = "";
@@ -1672,7 +1821,7 @@ async function generate404Page(config, assets) {
   console.log("  -> 404.html");
 }
 
-async function generatePages(config, assets, updates, articles, gallery, projects) {
+async function generatePages(config, assets, updates, articles, gallery, projects, liveApps) {
   for (const record of updates) {
     await writePage(`/updates/${record.id}`, makeArticlePageHtml(config, assets, record, "updates"));
   }
@@ -1716,6 +1865,7 @@ async function generatePages(config, assets, updates, articles, gallery, project
       projects,
     ),
   );
+  await writePage("/apps", makeAppsPageHtml(config, assets, liveApps));
   await writePage("/gallery", makeGalleryPageHtml(config, assets, gallery));
   await writePage("/search", makeSearchPageHtml(config, assets));
 
@@ -1749,7 +1899,7 @@ function sitemapEntry(config, pathname, options = {}) {
   return `<url><loc>${escapeXml(canonicalUrl(config, pathname))}</loc>${options.lastmod ? `<lastmod>${escapeXml(options.lastmod)}</lastmod>` : ""}<changefreq>${options.changefreq || "monthly"}</changefreq><priority>${options.priority || "0.7"}</priority>${imageTags}${videoTags}</url>`;
 }
 
-async function generateSitemap(config, updates, articles, gallery, projects) {
+async function generateSitemap(config, updates, articles, gallery, projects, liveApps) {
   const entries = [
     sitemapEntry(config, "/", { changefreq: "weekly", priority: "1.0" }),
     sitemapEntry(config, "/stack", { changefreq: "monthly", priority: "0.7" }),
@@ -1763,6 +1913,11 @@ async function generateSitemap(config, updates, articles, gallery, projects) {
     sitemapEntry(config, "/updates", { changefreq: "weekly", priority: "0.8" }),
     sitemapEntry(config, "/articles", { changefreq: "weekly", priority: "0.8" }),
     sitemapEntry(config, "/projects", { changefreq: "monthly", priority: "0.8" }),
+    sitemapEntry(config, "/apps", {
+      changefreq: "monthly",
+      priority: "0.7",
+      images: liveApps.filter((a) => a.image && !/^https?:\/\//i.test(a.image)).map((a) => ({ src: a.image, caption: a.title })),
+    }),
   ];
   for (const r of updates) entries.push(sitemapEntry(config, `/updates/${r.id}`, { lastmod: r.updated || r.date, priority: "0.7", images: r.image ? [{ src: r.image }] : [] }));
   for (const r of articles) {
@@ -1876,7 +2031,7 @@ async function generateJsonFeed(config, articles) {
   console.log("  -> feed.json");
 }
 
-function makeSearchRecords(config, updates, articles, gallery, projects) {
+function makeSearchRecords(config, updates, articles, gallery, projects, liveApps) {
   const records = [
     {
       type: "page",
@@ -1898,6 +2053,13 @@ function makeSearchRecords(config, updates, articles, gallery, projects) {
       summary: "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
       url: "/gallery",
       content: gallery.map((item) => item.caption).join(" "),
+    },
+    {
+      type: "page",
+      title: "Subdomains & Live Apps",
+      summary: "Deployed apps, documentation sites, and live demos.",
+      url: "/apps",
+      content: (liveApps || []).map((a) => `${a.title} ${a.description || ""}`).join(" "),
     },
   ];
   for (const [type, items] of [
@@ -1936,11 +2098,21 @@ function makeSearchRecords(config, updates, articles, gallery, projects) {
       content: item.url,
     });
   }
+  for (const item of (liveApps || [])) {
+    records.push({
+      type: "apps",
+      title: item.title,
+      summary: item.description || "",
+      url: "/apps",
+      tags: [item.type || "link"],
+      content: "",
+    });
+  }
   return records;
 }
 
-async function generateMachineIndexes(config, updates, articles, gallery, projects) {
-  const searchRecords = makeSearchRecords(config, updates, articles, gallery, projects);
+async function generateMachineIndexes(config, updates, articles, gallery, projects, liveApps) {
+  const searchRecords = makeSearchRecords(config, updates, articles, gallery, projects, liveApps);
   await fs.writeFile(SEARCH_INDEX_JSON, JSON.stringify(searchRecords, null, 2), "utf8");
   const siteIndex = {
     site: {
@@ -1964,7 +2136,7 @@ async function generateMachineIndexes(config, updates, articles, gallery, projec
   console.log("  -> site-index.json");
 }
 
-async function generateLlmsTxt(config, updates, articles, projects) {
+async function generateLlmsTxt(config, updates, articles, projects, liveApps) {
   const lines = [
     `# ${config.siteName}`,
     `> ${config.description}`,
@@ -1977,6 +2149,7 @@ async function generateLlmsTxt(config, updates, articles, projects) {
     `- Projects: ${collectionUrl(config, "projects")}`,
     `- Articles: ${collectionUrl(config, "articles")}`,
     `- Updates: ${collectionUrl(config, "updates")}`,
+    `- Live Apps: ${collectionUrl(config, "apps")}`,
     `- Gallery: ${canonicalUrl(config, "/gallery")}`,
     `- Search index JSON: ${config.baseUrl}/search-index.json`,
     `- Site index JSON: ${config.baseUrl}/site-index.json`,
@@ -1985,6 +2158,11 @@ async function generateLlmsTxt(config, updates, articles, projects) {
   if (projects.length) {
     lines.push("## Projects");
     for (const r of projects) lines.push(`- [${r.title}](${recordUrl(config, "projects", r.id)}): ${r.summary}`);
+    lines.push("");
+  }
+  if (liveApps.length) {
+    lines.push("## Live Apps");
+    for (const a of liveApps) lines.push(`- [${a.title}](${a.url}): ${a.description || a.type}`);
     lines.push("");
   }
   if (articles.length) {
@@ -2031,6 +2209,7 @@ async function submitIndexNow(config, updates, articles, gallery, projects) {
   urls.push(`${config.baseUrl}/updates`);
   urls.push(`${config.baseUrl}/articles`);
   urls.push(`${config.baseUrl}/projects`);
+  urls.push(`${config.baseUrl}/apps`);
 
   const payload = {
     host: "lonelyguy.tech",
@@ -2121,7 +2300,7 @@ function updateHeadJsonLd(html, config, projects, articles) {
   );
 }
 
-async function updateHomepage(config, assets, updates, articles, projects) {
+async function updateHomepage(config, assets, updates, articles, projects, liveApps) {
   const indexPath = path.join(ROOT, "index.html");
   let html = await fs.readFile(indexPath, "utf8");
 
@@ -2190,13 +2369,14 @@ async function build() {
   console.log("converting images...");
   await convertImages();
 
-  const [updates, articles, gallery, projects] = await Promise.all([
+  const [updates, articles, gallery, projects, liveApps] = await Promise.all([
     readMarkdownCollection(COLLECTION_DIRS.updates),
     readMarkdownCollection(COLLECTION_DIRS.articles),
     readGallery(),
     readProjects(),
+    readLiveApps(),
   ]);
-  const content = { updates, articles, gallery, projects };
+  const content = { updates, articles, gallery, projects, liveApps };
   await fs.writeFile(CONTENT_JS, `window.PORTFOLIO_CONTENT=${JSON.stringify(content)};\n`, "utf8");
   console.log("  -> scripts/content.js");
 
@@ -2207,19 +2387,19 @@ async function build() {
   await generate404Page(config, assets);
 
   console.log("generating pages...");
-  await generatePages(config, assets, updates, articles, gallery, projects);
+  await generatePages(config, assets, updates, articles, gallery, projects, liveApps);
 
   console.log("generating sitemap...");
-  await generateSitemap(config, updates, articles, gallery, projects);
+  await generateSitemap(config, updates, articles, gallery, projects, liveApps);
 
   console.log("generating feeds...");
   await Promise.all([generateRssFeed(config, articles), generateJsonFeed(config, articles)]);
 
   console.log("generating machine indexes...");
-  await generateMachineIndexes(config, updates, articles, gallery, projects);
+  await generateMachineIndexes(config, updates, articles, gallery, projects, liveApps);
 
   console.log("generating llms.txt...");
-  await generateLlmsTxt(config, updates, articles, projects);
+  await generateLlmsTxt(config, updates, articles, projects, liveApps);
 
   console.log("generating robots.txt...");
   await generateRobotsTxt(config);
@@ -2228,7 +2408,7 @@ async function build() {
   await submitIndexNow(config, updates, articles, gallery, projects);
 
   console.log("updating homepage...");
-  await updateHomepage(config, assets, updates, articles, projects);
+  await updateHomepage(config, assets, updates, articles, projects, liveApps);
 
   console.log("done.");
 }

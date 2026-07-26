@@ -9,6 +9,7 @@ Lonely Guy is building toward autonomous robotic assistants through reinforcemen
 - Projects: https://lonelyguy.tech/projects
 - Articles: https://lonelyguy.tech/articles
 - Updates: https://lonelyguy.tech/updates
+- Live Apps: https://lonelyguy.tech/apps
 - Gallery: https://lonelyguy.tech/gallery
 - Search index JSON: https://lonelyguy.tech/search-index.json
 - Site index JSON: https://lonelyguy.tech/site-index.json
@@ -19,6 +20,12 @@ Lonely Guy is building toward autonomous robotic assistants through reinforcemen
 - [Project Halide](https://lonelyguy.tech/projects/project-halide): Small-model diagnostic workbench for damaged film scans using MiniCPM-V, Nemotron-Mini, strict validation, overlays, telemetry, and a Gradio light-table UI.
 - [Cybersec OpenEnv](https://lonelyguy.tech/projects/cybersec-openenv): Long-horizon cyber-defense POMDP for training and evaluating small LLM SOC agents with GRPO, realistic attack chains, and reward-hacking resistant containment incentives.
 - [Breakout-DQN](https://lonelyguy.tech/projects/breakout-dqn): From-scratch Atari Breakout DQN study for building intuition around deep RL, preprocessing, replay, target networks, and early DeepMind-style agent design.
+
+## Live Apps
+- [Syntagma](https://syntagma.lonelyguy.tech/): Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.
+- [Project Halide](https://huggingface.co/spaces/build-small-hackathon/project-halide): Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.
+- [Cybersec OpenEnv](https://huggingface.co/spaces/Lonelyguyse1/cybersec): Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.
+- [Raijin LOB](https://lonelyguy-se1.github.io/Raijin-LOB/): Documentation and public benchmarks for the C++ limit order book engine.
 
 ## Articles
 - [Syntagma, Building An Agentic Curriculum Lifecycle Management System](https://lonelyguy.tech/articles/2026-07-22-syntagma): A production-grade curriculum management platform for PES University: agentic refinement, 36-tool editor with reviewable drafts, git-like versioning, Jinja2-powered A4 PDFs, and a deliberately vanilla frontend.

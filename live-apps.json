@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Syntagma",
+    "url": "https://syntagma.lonelyguy.tech/",
+    "type": "demo",
+    "description": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
+    "image": "gallery/syntagma.home_page.png",
+    "links": [
+      { "label": "docs", "url": "https://syntagma.lonelyguy.tech/docs/" }
+    ]
+  },
+  {
+    "title": "Project Halide",
+    "url": "https://huggingface.co/spaces/build-small-hackathon/project-halide",
+    "type": "demo",
+    "description": "Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.",
+    "image": "assets/halide/halide-app.png"
+  },
+  {
+    "title": "Cybersec OpenEnv",
+    "url": "https://huggingface.co/spaces/Lonelyguyse1/cybersec",
+    "type": "demo",
+    "description": "Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.",
+    "image": "gallery/env.cybersec.png"
+  },
+  {
+    "title": "Raijin LOB",
+    "url": "https://lonelyguy-se1.github.io/Raijin-LOB/",
+    "type": "docs",
+    "description": "Documentation and public benchmarks for the C++ limit order book engine.",
+    "image": "gallery/bench.raijin.png"
+  }
+]
