@@ -31,7 +31,7 @@
       "location": "India"
     }
   },
-  "generatedAt": "2026-07-26T15:52:51.295Z",
+  "generatedAt": "2026-07-28T15:29:02.122Z",
   "routes": [
     {
       "type": "page",
@@ -43,9 +43,9 @@
     },
     {
       "type": "page",
-      "title": "Stack",
+      "title": "skill tree / sub stuff",
       "url": "https://lonelyguy.tech/stack",
-      "summary": "A practical skill map for lonely guy across programming, machine learning, robotics simulation, systems, and deployment.",
+      "summary": "this section is something ive always struggled with, when exactly could one call that they have acquired a certain skill, im sure the field keeps evolving... so its better to judge me by having a talk. also what if i learned something but forgot it, or learned it but cannot apply it.",
       "tags": [],
       "date": ""
     },
@@ -231,6 +231,14 @@
     },
     {
       "type": "gallery",
+      "title": "tree.lonelyguy.tech",
+      "url": "https://lonelyguy.tech/gallery",
+      "summary": "Project tree viewer",
+      "tags": [],
+      "date": ""
+    },
+    {
+      "type": "gallery",
       "title": "Cybersec OpenEnv",
       "url": "https://lonelyguy.tech/gallery",
       "summary": "Cybersec OpenEnv environment visualization",
@@ -323,6 +331,16 @@
       "url": "https://lonelyguy.tech/gallery",
       "summary": "Damaged 35mm negative used to evaluate Project Halide",
       "tags": [],
+      "date": ""
+    },
+    {
+      "type": "apps",
+      "title": "tree",
+      "url": "https://lonelyguy.tech/apps",
+      "summary": "Personal project tree viewer.",
+      "tags": [
+        "demo"
+      ],
       "date": ""
     },
     {

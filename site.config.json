@@ -86,6 +86,18 @@
       "url": "https://www.alphaxiv.org/@greeshma-surya",
       "rel": "me",
       "icon": "/assets/icons/alphaxiv.png"
+    },
+    {
+      "label": "npm",
+      "url": "https://www.npmjs.com/~lonelyguy",
+      "rel": "me",
+      "icon": "/assets/icons/npm.svg"
+    },
+    {
+      "label": "Google Dev",
+      "url": "https://g.dev/lonelyguyse1",
+      "rel": "me",
+      "icon": "/assets/icons/google.svg"
     }
   ]
 }

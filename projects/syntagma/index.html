@@ -98,7 +98,75 @@
           <div><dt>proof</dt><dd><ul><li>51 API endpoints across 9 route files</li><li>36 agent tools across 7 categories</li><li>12-table relational schema with versioned snapshots</li><li>Dual cache layer: Upstash Redis + in-memory with lazy invalidation</li><li>3 preview formats: HTML, diff, and A4 PDF with letterhead</li><li>Multi-download options: single course, semester, full curriculum</li></ul></dd></div>
         </dl>
         <div class="project-media-grid"><figure><picture><source srcset="/gallery/syntagma.home_page.avif" type="image/avif"><source srcset="/gallery/syntagma.home_page.webp" type="image/webp"><img src="/gallery/syntagma.home_page.png" alt="Syntagma dashboard" loading="lazy" decoding="async"></picture><figcaption>Syntagma dashboard</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.submit_course_page.avif" type="image/avif"><source srcset="/gallery/syntagma.submit_course_page.webp" type="image/webp"><img src="/gallery/syntagma.submit_course_page.png" alt="Course submission form" loading="lazy" decoding="async"></picture><figcaption>Course submission form</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.courses_default.avif" type="image/avif"><source srcset="/gallery/syntagma.courses_default.webp" type="image/webp"><img src="/gallery/syntagma.courses_default.png" alt="Course management table with filters" loading="lazy" decoding="async"></picture><figcaption>Course management table with filters</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.editor_sample_annotated.avif" type="image/avif"><source srcset="/gallery/syntagma.editor_sample_annotated.webp" type="image/webp"><img src="/gallery/syntagma.editor_sample_annotated.png" alt="Agentic editor with chat, fields panel, and draft review" loading="lazy" decoding="async"></picture><figcaption>Agentic editor with chat, fields panel, and draft review</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.preview_full_doc.avif" type="image/avif"><source srcset="/gallery/syntagma.preview_full_doc.webp" type="image/webp"><img src="/gallery/syntagma.preview_full_doc.png" alt="Full curriculum PDF preview" loading="lazy" decoding="async"></picture><figcaption>Full curriculum PDF preview</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.preview_single_course.avif" type="image/avif"><source srcset="/gallery/syntagma.preview_single_course.webp" type="image/webp"><img src="/gallery/syntagma.preview_single_course.png" alt="Single course PDF page with letterhead" loading="lazy" decoding="async"></picture><figcaption>Single course PDF page with letterhead</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.versions_annotated_comparision.avif" type="image/avif"><source srcset="/gallery/syntagma.versions_annotated_comparision.webp" type="image/webp"><img src="/gallery/syntagma.versions_annotated_comparision.png" alt="Side-by-side version comparison diff" loading="lazy" decoding="async"></picture><figcaption>Side-by-side version comparison diff</figcaption></figure><figure><picture><source srcset="/gallery/syntagma.editor_single_course.avif" type="image/avif"><source srcset="/gallery/syntagma.editor_single_course.webp" type="image/webp"><img src="/gallery/syntagma.editor_single_course.png" alt="Single course agentic editor" loading="lazy" decoding="async"></picture><figcaption>Single course agentic editor</figcaption></figure></div>
-        <div class="reader-body"><p>PES University revamps its B.Tech curriculum nearly every academic year. Faculty submit course content in raw, inconsistent formats. Someone manually compiles it into the official syllabus document. No version history, no way to compare what changed between years. Entirely manual, error-prone, slow.</p><p>Syntagma replaces that with an agentic lifecycle management system. Faculty submit through a form, the agent refines raw content into structured curriculum-ready records (Pydantic-validated, course codes auto-parsed for semester/department/credits). An agentic editor with 36 type-registered tools lets admins propose and review changes through reviewable drafts that never auto-apply. The curriculum renders as official A4 PDFs through a Jinja2 templating engine with four template variants (single course, semester, full curriculum, program outcomes) and multiple download options (inline preview, attachment download, single course, semester-level, full document). Every change is tracked through a git-like versioning system: named snapshots, restore, and version-vs-version diff.</p><p>The architecture runs on a 12-table Supabase PostgreSQL schema with dual cache layer (Upstash Redis with in-memory fallback and lazy pattern-based invalidation), cache prewarm at startup, and Sentry error tracking. The frontend is vanilla HTML/CSS/JS served from Vercel with API proxied through to the FastAPI Docker backend on Hugging Face Spaces. CORS middleware handles the cross-origin bridge. The agent tool system is built as a frozen dataclass registry with typed JSON Schema parameters, enabling complex tool chains: the agent can chain batch course reads, spreadsheet generation, web research, draft creation, and version snapshots in a single session. From competitor research to drafting courses to generating complete syllabuses in minutes.</p></div>
+        <div class="reader-body"><p>PES University revamps its B.Tech curriculum nearly every academic year. Faculty submit course content in raw, inconsistent formats. Someone manually compiles it into the official syllabus document. No version history, no way to compare what changed between years. Entirely manual, error-prone, slow.</p><p>Syntagma replaces that with an agentic lifecycle management system. Faculty submit through a form, the agent refines raw content into structured curriculum-ready records (Pydantic-validated, course codes auto-parsed for semester/department/credits). An agentic editor with 36 type-registered tools lets admins propose and review changes through reviewable drafts that never auto-apply. The curriculum renders as official A4 PDFs through a Jinja2 templating engine with four template variants (single course, semester, full curriculum, program outcomes) and multiple download options (inline preview, attachment download, single course, semester-level, full document). Every change is tracked through a git-like versioning system: named snapshots, restore, and version-vs-version diff.</p><p>The architecture runs on a 12-table Supabase PostgreSQL schema with dual cache layer (Upstash Redis with in-memory fallback and lazy pattern-based invalidation), cache prewarm at startup, and Sentry error tracking. The frontend is vanilla HTML/CSS/JS served from Vercel with API proxied through to the FastAPI Docker backend on Hugging Face Spaces. CORS middleware handles the cross-origin bridge. The agent tool system is built as a frozen dataclass registry with typed JSON Schema parameters, enabling complex tool chains: the agent can chain batch course reads, spreadsheet generation, web research, draft creation, and version snapshots in a single session. From competitor research to drafting courses to generating complete syllabuses in minutes.</p><h2>System Architecture</h2><div class="mermaid">flowchart TB
+    subgraph Frontend["Frontend (Vanilla HTML/CSS/JS)"]
+        Auth["/auth/ Sign In"]
+        Dashboard["/ Dashboard"]
+        Form["/form/ Course Submission"]
+        Courses["/courses/ Course Management"]
+        Preview["/preview/ PDF Preview"]
+        Editor["/live-editor/ Agentic Editor"]
+        Versions["/versions/ Version History"]
+    end
+
+    subgraph Backend["FastAPI Backend (/api)"]
+        direction TB
+        SubAPI["Submissions"]
+        CoursesAPI["Courses"]
+        PreviewAPI["Preview (8 endpoints)"]
+        AgentAPI["Agent (13 endpoints)"]
+        ChatAPI["Chat (SSE streaming)"]
+        VersionsAPI["Versions (10 endpoints)"]
+    end
+
+    subgraph Services["Services Layer"]
+        Refinement["Refinement - LLM content extraction"]
+        AgentTools["Agent Tools - 35 tools"]
+        Diffing["Diffing - protected field validation"]
+        Curriculum["Curriculum - sorting, snapshots"]
+        PreviewSvc["Preview - build_course_preview"]
+        Rendering["Rendering - Jinja2 + WeasyPrint"]
+        Cache["Cache - Redis + in-memory"]
+    end
+
+    subgraph External["External Services"]
+        LLM["OpenRouter - Primary + Fallback"]
+        Redis[("Upstash Redis")]
+        Supa[(Supabase Postgres)]
+        WeasyPrint["WeasyPrint - A4 PDF"]
+    end
+
+    Auth -->|"JWT"| Dashboard
+    Dashboard --> Form & Courses & Preview & Editor & Versions
+
+    Form -->|"POST /submissions"| SubAPI
+    SubAPI --> Refinement
+    Refinement -->|"extract content"| LLM
+    Refinement -->|"store"| Supa
+
+    Courses --> CoursesAPI
+    CoursesAPI --> Cache
+    Cache -.-|"miss"| Supa
+
+    Preview --> PreviewAPI
+    PreviewAPI --> PreviewSvc
+    PreviewSvc --> Rendering
+    Rendering --> WeasyPrint
+
+    Editor -->|"SSE"| ChatAPI
+    ChatAPI --> LLM
+    LLM -->|"tool calls"| AgentTools
+    AgentTools --> Supa
+    ChatAPI -->|"save"| Supa
+
+    VersionsAPI --> Curriculum
+    Curriculum -->|"snapshot"| Supa
+
+    Editor -->|"review/apply"| AgentAPI
+    AgentAPI --> Diffing
+    Diffing -->|"validate"| Supa
+
+    Cache -.- Redis</div></div>
       </article>
     </main>
     <footer class="site-footer" id="footer" data-nosnippet>
@@ -153,7 +221,7 @@
     })();
     </script>
     <script src="https://js.supascribe.com/v1/loader/nOC91cmI8ZfrfPBUQ1aSbvF7NLf1.js" async></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" onload="mermaid.initialize({startOnLoad:false,theme:'dark',themeVariables:{primaryColor:'#ff6b35',primaryTextColor:'#ff6b35',lineColor:'#ff6b35',secondaryColor:'#0e0403',tertiaryColor:'#000100'}});document.querySelectorAll('.mermaid').forEach(function(el){mermaid.run({nodes:[el]});});"></script>
     <script defer src="/assets/build/assistant.2b83d49741.js"></script>
 </body>
 </html>

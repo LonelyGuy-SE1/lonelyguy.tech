@@ -22,6 +22,7 @@ Lonely Guy is building toward autonomous robotic assistants through reinforcemen
 - [Breakout-DQN](https://lonelyguy.tech/projects/breakout-dqn): From-scratch Atari Breakout DQN study for building intuition around deep RL, preprocessing, replay, target networks, and early DeepMind-style agent design.
 
 ## Live Apps
+- [tree](https://tree.lonelyguy.tech): Personal project tree viewer.
 - [Syntagma](https://syntagma.lonelyguy.tech/): Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.
 - [Project Halide](https://huggingface.co/spaces/build-small-hackathon/project-halide): Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.
 - [Cybersec OpenEnv](https://huggingface.co/spaces/Lonelyguyse1/cybersec): Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.
@@ -45,3 +46,5 @@ Lonely Guy is building toward autonomous robotic assistants through reinforcemen
 - [Substack](https://lonelyguyse1.substack.com)
 - [LinkedIn](https://www.linkedin.com/in/greeshmasurya/)
 - [AlphaXiv](https://www.alphaxiv.org/@greeshma-surya)
+- [npm](https://www.npmjs.com/~lonelyguy)
+- [Google Dev](https://g.dev/lonelyguyse1)
