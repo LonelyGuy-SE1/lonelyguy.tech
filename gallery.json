@@ -78,5 +78,10 @@
     "url": "gallery/atari.breakout.preprocessing.png",
     "alt": "Preprocessed Breakout observation frame",
     "caption": "Breakout preprocessing"
+  },
+  {
+    "url": "gallery/tree.jpeg",
+    "alt": "Project tree viewer",
+    "caption": "tree.lonelyguy.tech"
   }
 ]

@@ -8,10 +8,10 @@
   },
   {
     "type": "page",
-    "title": "Stack",
-    "summary": "A practical skill map for lonely guy across programming, machine learning, robotics simulation, systems, and deployment.",
+    "title": "skill tree / sub stuff",
+    "summary": "this section is something ive always struggled with, when exactly could one call that they have acquired a certain skill, im sure the field keeps evolving... so its better to judge me by having a talk. also what if i learned something but forgot it, or learned it but cannot apply it.",
     "url": "/stack",
-    "content": "Languages and formats Python, C/C++, JavaScript, Rust, MATLAB, Bash, URDF, MJCF, and the low-level interfaces needed to move between simulation and real systems. AI and ML Reinforcement learning, deep learning, supervised and unsupervised learning, LLM basics, transformers, Gymnasium, PyTorch-style workflows, Hugging Face, NumPy, pandas, and visualization. Robotics and embedded systems MuJoCo, MATLAB, Simulink, Simscape Multibody, Gazebo, ROS, Arduino, Raspberry Pi, sensors, and embedded C/C++ practice. Systems thinking Deterministic runtimes, quantized deployment, cache-aware inference, API design, and the habit of turning vague agent ideas into testable environments."
+    "content": ""
   },
   {
     "type": "page",
@@ -25,14 +25,14 @@
     "title": "Gallery",
     "summary": "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
     "url": "/gallery",
-    "content": "Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor Cybersec OpenEnv Raijin LOB benchmarks Project Halide workbench Humanoid circuit Biped arm simulation Biped arm result Biped arm training graph Clanker pose Shiori extension Atari Breakout Breakout preprocessing Damaged 35mm negative"
+    "content": "Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor tree.lonelyguy.tech Cybersec OpenEnv Raijin LOB benchmarks Project Halide workbench Humanoid circuit Biped arm simulation Biped arm result Biped arm training graph Clanker pose Shiori extension Atari Breakout Breakout preprocessing Damaged 35mm negative"
   },
   {
     "type": "page",
     "title": "Subdomains & Live Apps",
     "summary": "Deployed apps, documentation sites, and live demos.",
     "url": "/apps",
-    "content": "Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
+    "content": "tree Personal project tree viewer. Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
   },
   {
     "type": "updates",
@@ -107,7 +107,7 @@
       "fastapi",
       "supabase"
     ],
-    "content": "PES University revamps its B.Tech curriculum nearly every academic year. Faculty submit course content in raw, inconsistent formats. Someone manually compiles it into the official syllabus document. No version history, no way to compare what changed between years. Entirely manual, error-prone, slow. Syntagma replaces that with an agentic lifecycle management system. Faculty submit through a form, the agent refines raw content into structured curriculum-ready records (Pydantic-validated, course codes auto-parsed for semester/department/credits). An agentic editor with 36 type-registered tools lets admins propose and review changes through reviewable drafts that never auto-apply. The curriculum renders as official A4 PDFs through a Jinja2 templating engine with four template variants (single course, semester, full curriculum, program outcomes) and multiple download options (inline preview, attachment download, single course, semester-level, full document). Every change is tracked through a git-like versioning system: named snapshots, restore, and version-vs-version diff. The architecture runs on a 12-table Supabase PostgreSQL schema with dual cache layer (Upstash Redis with in-memory fallback and lazy pattern-based invalidation), cache prewarm at startup, and Sentry error tracking. The frontend is vanilla HTML/CSS/JS served from Vercel with API proxied through to the FastAPI Docker backend on Hugging Face Spaces. CORS middleware handles the cross-origin bridge. The agent tool system is built as a frozen dataclass registry with typed JSON Schema parameters, enabling complex tool chains: the agent can chain batch course reads, spreadsheet generation, web research, draft creation, and version snapshots in a single session. From competitor research to drafting courses to generating complete syllabuses in minutes. Python 3.12 FastAPI Supabase (PostgreSQL) Upstash Redis WeasyPrint Jinja2 Vanilla HTML/CSS/JS 51 API endpoints across 9 route files 36 agent tools across 7 categories 12-table relational schema with versioned snapshots Dual cache layer: Upstash Redis + in-memory with lazy invalidation 3 preview formats: HTML, diff, and A4 PDF with letterhead Multi-download options: single course, semester, full curriculum"
+    "content": "PES University revamps its B.Tech curriculum nearly every academic year. Faculty submit course content in raw, inconsistent formats. Someone manually compiles it into the official syllabus document. No version history, no way to compare what changed between years. Entirely manual, error-prone, slow. Syntagma replaces that with an agentic lifecycle management system. Faculty submit through a form, the agent refines raw content into structured curriculum-ready records (Pydantic-validated, course codes auto-parsed for semester/department/credits). An agentic editor with 36 type-registered tools lets admins propose and review changes through reviewable drafts that never auto-apply. The curriculum renders as official A4 PDFs through a Jinja2 templating engine with four template variants (single course, semester, full curriculum, program outcomes) and multiple download options (inline preview, attachment download, single course, semester-level, full document). Every change is tracked through a git-like versioning system: named snapshots, restore, and version-vs-version diff. The architecture runs on a 12-table Supabase PostgreSQL schema with dual cache layer (Upstash Redis with in-memory fallback and lazy pattern-based invalidation), cache prewarm at startup, and Sentry error tracking. The frontend is vanilla HTML/CSS/JS served from Vercel with API proxied through to the FastAPI Docker backend on Hugging Face Spaces. CORS middleware handles the cross-origin bridge. The agent tool system is built as a frozen dataclass registry with typed JSON Schema parameters, enabling complex tool chains: the agent can chain batch course reads, spreadsheet generation, web research, draft creation, and version snapshots in a single session. From competitor research to drafting courses to generating complete syllabuses in minutes. System Architecture flowchart TB subgraph Frontend[\"Frontend (Vanilla HTML/CSS/JS)\"] Auth[\"/auth/ Sign In\"] Dashboard[\"/ Dashboard\"] Form[\"/form/ Course Submission\"] Courses[\"/courses/ Course Management\"] Preview[\"/preview/ PDF Preview\"] Editor[\"/live-editor/ Agentic Editor\"] Versions[\"/versions/ Version History\"] end subgraph Backend[\"FastAPI Backend (/api)\"] direction TB SubAPI[\"Submissions\"] CoursesAPI[\"Courses\"] PreviewAPI[\"Preview (8 endpoints)\"] AgentAPI[\"Agent (13 endpoints)\"] ChatAPI[\"Chat (SSE streaming)\"] VersionsAPI[\"Versions (10 endpoints)\"] end subgraph Services[\"Services Layer\"] Refinement[\"Refinement - LLM content extraction\"] AgentTools[\"Agent Tools - 35 tools\"] Diffing[\"Diffing - protected field validation\"] Curriculum[\"Curriculum - sorting, snapshots\"] PreviewSvc[\"Preview - build_course_preview\"] Rendering[\"Rendering - Jinja2 + WeasyPrint\"] Cache[\"Cache - Redis + in-memory\"] end subgraph External[\"External Services\"] LLM[\"OpenRouter - Primary + Fallback\"] Redis[(\"Upstash Redis\")] Supa[(Supabase Postgres)] WeasyPrint[\"WeasyPrint - A4 PDF\"] end Auth -->|\"JWT\"| Dashboard Dashboard --> Form & Courses & Preview & Editor & Versions Form -->|\"POST /submissions\"| SubAPI SubAPI --> Refinement Refinement -->|\"extract content\"| LLM Refinement -->|\"store\"| Supa Courses --> CoursesAPI CoursesAPI --> Cache Cache -.-|\"miss\"| Supa Preview --> PreviewAPI PreviewAPI --> PreviewSvc PreviewSvc --> Rendering Rendering --> WeasyPrint Editor -->|\"SSE\"| ChatAPI ChatAPI --> LLM LLM -->|\"tool calls\"| AgentTools AgentTools --> Supa ChatAPI -->|\"save\"| Supa VersionsAPI --> Curriculum Curriculum -->|\"snapshot\"| Supa Editor -->|\"review/apply\"| AgentAPI AgentAPI --> Diffing Diffing -->|\"validate\"| Supa Cache -.- Redis Python 3.12 FastAPI Supabase (PostgreSQL) Upstash Redis WeasyPrint Jinja2 Vanilla HTML/CSS/JS 51 API endpoints across 9 route files 36 agent tools across 7 categories 12-table relational schema with versioned snapshots Dual cache layer: Upstash Redis + in-memory with lazy invalidation 3 preview formats: HTML, diff, and A4 PDF with letterhead Multi-download options: single course, semester, full curriculum"
   },
   {
     "type": "projects",
@@ -199,6 +199,13 @@
   },
   {
     "type": "gallery",
+    "title": "tree.lonelyguy.tech",
+    "summary": "Project tree viewer",
+    "url": "/gallery",
+    "content": "gallery/tree.jpeg"
+  },
+  {
+    "type": "gallery",
     "title": "Cybersec OpenEnv",
     "summary": "Cybersec OpenEnv environment visualization",
     "url": "/gallery",
@@ -280,6 +287,16 @@
     "summary": "Damaged 35mm negative used to evaluate Project Halide",
     "url": "/gallery",
     "content": "assets/halide/real-35mm-negative-banner.jpg"
+  },
+  {
+    "type": "apps",
+    "title": "tree",
+    "summary": "Personal project tree viewer.",
+    "url": "/apps",
+    "tags": [
+      "demo"
+    ],
+    "content": ""
   },
   {
     "type": "apps",

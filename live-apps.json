@@ -1,5 +1,15 @@
 [
   {
+    "title": "tree",
+    "url": "https://tree.lonelyguy.tech",
+    "type": "demo",
+    "description": "Personal project tree viewer.",
+    "image": "gallery/tree.jpeg",
+    "links": [
+      { "label": "demo", "url": "https://tree.lonelyguy.tech" }
+    ]
+  },
+  {
     "title": "Syntagma",
     "url": "https://syntagma.lonelyguy.tech/",
     "type": "demo",

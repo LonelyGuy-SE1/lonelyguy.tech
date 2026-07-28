@@ -25,28 +25,11 @@ const STATIC_PAGES = [
   {
     id: "stack",
     path: "/stack",
-    title: "Stack",
+    title: "skill tree / sub stuff",
     description:
-      "A practical skill map for lonely guy across programming, machine learning, robotics simulation, systems, and deployment.",
-    kicker: "skill map",
-    sections: [
-      {
-        title: "Languages and formats",
-        body: "Python, C/C++, JavaScript, Rust, MATLAB, Bash, URDF, MJCF, and the low-level interfaces needed to move between simulation and real systems.",
-      },
-      {
-        title: "AI and ML",
-        body: "Reinforcement learning, deep learning, supervised and unsupervised learning, LLM basics, transformers, Gymnasium, PyTorch-style workflows, Hugging Face, NumPy, pandas, and visualization.",
-      },
-      {
-        title: "Robotics and embedded systems",
-        body: "MuJoCo, MATLAB, Simulink, Simscape Multibody, Gazebo, ROS, Arduino, Raspberry Pi, sensors, and embedded C/C++ practice.",
-      },
-      {
-        title: "Systems thinking",
-        body: "Deterministic runtimes, quantized deployment, cache-aware inference, API design, and the habit of turning vague agent ideas into testable environments.",
-      },
-    ],
+      "this section is something ive always struggled with, when exactly could one call that they have acquired a certain skill, im sure the field keeps evolving... so its better to judge me by having a talk. also what if i learned something but forgot it, or learned it but cannot apply it.",
+    kicker: "stack",
+    sections: [],
   },
   {
     id: "contact",
@@ -1066,10 +1049,7 @@ function makeArticlePageHtml(config, assets, record, type) {
         ${renderTagList(record.tags)}
         <div class="reader-body">${toRootRelativePaths(record.html)}</div>
       </article>`;
-  const hasMermaid = /class="mermaid"/.test(record.html);
-  const mermaidScript = hasMermaid
-    ? `<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" onload="mermaid.initialize({startOnLoad:false,theme:'dark',themeVariables:{primaryColor:'#ff6b35',primaryTextColor:'#ff6b35',lineColor:'#ff6b35',secondaryColor:'#0e0403',tertiaryColor:'#000100'}});document.querySelectorAll('.mermaid').forEach(function(el){mermaid.run({nodes:[el]});});"></script>`
-    : "";
+  const mermaidScript = hasMermaidInHtml(record.html) ? mermaidScriptHtml() : "";
   return shell(
     config,
     assets,
@@ -1209,6 +1189,7 @@ function stackBoardHtml(options = {}) {
               { label: "rust", logo: "rust", color: "ce422b" },
               { label: "matlab", logo: "mathworks", color: "e16737" },
               { label: "bash", logo: "gnubash", color: "4eaa25" },
+              { label: "npm", logo: "npm", color: "cb3837" },
               { label: "urdf", color: "cc8833" },
               { label: "html", logo: "html5", color: "e34f26" },
               { label: "css", logo: "css3", color: "1572b6" },
@@ -1257,6 +1238,10 @@ function stackBoardHtml(options = {}) {
               { label: "jupyter", logo: "jupyter", color: "f37626", logoColor: "000000" },
               { label: "colab", logo: "googlecolab", color: "f9ab00", logoColor: "000000" },
               { label: "parallax", color: "cc8833", logoColor: "000000" },
+              { label: "cloudflare", logo: "cloudflare", color: "f38020" },
+              { label: "google search console", logo: "google", color: "4285f4", logoColor: "000000" },
+              { label: "bing webmaster", color: "008373" },
+              { label: "dns", color: "2c3e50" },
             ])}
             <p>
               also spent a good chunk of time on blockchain architecture, dapps,
@@ -1403,7 +1388,16 @@ function makeProjectPageHtml(config, assets, record) {
     },
     body,
     jsonLd,
+    hasMermaidInHtml(record.html) ? mermaidScriptHtml() : "",
   );
+}
+
+function hasMermaidInHtml(html) {
+  return /class="mermaid"/.test(html);
+}
+
+function mermaidScriptHtml() {
+  return `<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" onload="mermaid.initialize({startOnLoad:false,theme:'dark',themeVariables:{primaryColor:'#ff6b35',primaryTextColor:'#ff6b35',lineColor:'#ff6b35',secondaryColor:'#0e0403',tertiaryColor:'#000100'}});document.querySelectorAll('.mermaid').forEach(function(el){mermaid.run({nodes:[el]});});"></script>`;
 }
 
 function makeCollectionPageHtml(config, assets, type, title, description, records) {
@@ -2194,7 +2188,7 @@ Sitemap: ${config.baseUrl}/sitemap.xml
 }
 
 async function submitIndexNow(config, updates, articles, gallery, projects) {
-  const key = "1b38771147a342ff915f56163bebea6a";
+  const key = "cb355484dea602688fda103ae42c93b6";
   const urls = [];
 
   // Collect all page URLs
@@ -2212,9 +2206,9 @@ async function submitIndexNow(config, updates, articles, gallery, projects) {
   urls.push(`${config.baseUrl}/apps`);
 
   const payload = {
-    host: "lonelyguy.tech",
+    host: "www.lonelyguy.tech",
     key,
-    keyLocation: `${config.baseUrl}/${key}.txt`,
+    keyLocation: `https://www.lonelyguy.tech/${key}.txt`,
     urlList: urls,
   };
 
