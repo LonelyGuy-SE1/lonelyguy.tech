@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "Lonely Guy",
-    "url": "https://lonelyguy.tech/",
+    "url": "https://www.lonelyguy.tech/",
     "description": "Lonely Guy (Greeshma Surya) - CS undergrad building autonomous robotic assistants through reinforcement learning, robotics, world models, and embodied AI. Projects, research, and technical writing on RL, systems, and LLM agents.",
     "author": {
       "name": "Greeshma Surya",
@@ -31,12 +31,12 @@
       "location": "India"
     }
   },
-  "generatedAt": "2026-07-28T15:29:02.122Z",
+  "generatedAt": "2026-07-30T06:10:59.792Z",
   "routes": [
     {
       "type": "page",
       "title": "Home",
-      "url": "https://lonelyguy.tech/",
+      "url": "https://www.lonelyguy.tech/",
       "summary": "Lonely Guy (Greeshma Surya) - CS undergrad building autonomous robotic assistants through reinforcement learning, robotics, world models, and embodied AI. Projects, research, and technical writing on RL, systems, and LLM agents.",
       "tags": [],
       "date": ""
@@ -44,7 +44,7 @@
     {
       "type": "page",
       "title": "skill tree / sub stuff",
-      "url": "https://lonelyguy.tech/stack",
+      "url": "https://www.lonelyguy.tech/stack",
       "summary": "this section is something ive always struggled with, when exactly could one call that they have acquired a certain skill, im sure the field keeps evolving... so its better to judge me by having a talk. also what if i learned something but forgot it, or learned it but cannot apply it.",
       "tags": [],
       "date": ""
@@ -52,7 +52,7 @@
     {
       "type": "page",
       "title": "Contact",
-      "url": "https://lonelyguy.tech/contact",
+      "url": "https://www.lonelyguy.tech/contact",
       "summary": "Canonical links and contact routes for lonely guy across GitHub, X, Hugging Face, ORCID, LinkedIn, email, and Discord.",
       "tags": [],
       "date": ""
@@ -60,7 +60,7 @@
     {
       "type": "page",
       "title": "Gallery",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
       "tags": [],
       "date": ""
@@ -68,7 +68,7 @@
     {
       "type": "page",
       "title": "Subdomains & Live Apps",
-      "url": "https://lonelyguy.tech/apps",
+      "url": "https://www.lonelyguy.tech/apps",
       "summary": "Deployed apps, documentation sites, and live demos.",
       "tags": [],
       "date": ""
@@ -76,7 +76,7 @@
     {
       "type": "updates",
       "title": "June 2026 Updates - Raijin, Halide, Shiori, Android, and Simulation",
-      "url": "https://lonelyguy.tech/updates/2026-06-23-updates",
+      "url": "https://www.lonelyguy.tech/updates/2026-06-23-updates",
       "summary": "Progress update covering Raijin phase one, Project Halide, a Shiori Chrome extension, Android system work, competitive programming, and simulation work.",
       "tags": [
         "Raijin",
@@ -90,7 +90,7 @@
     {
       "type": "updates",
       "title": "Hackathons + Humanoid Simulation + UAV Conference + Breakout",
-      "url": "https://lonelyguy.tech/updates/2026-04-11-updates",
+      "url": "https://www.lonelyguy.tech/updates/2026-04-11-updates",
       "summary": "Qualified for some interesting hackathons, Good progress is being done on training the humanoid robot + Will be attending a UAV conference + Breakout might have to wait a bit.",
       "tags": [],
       "date": "2026-04-11"
@@ -98,7 +98,7 @@
     {
       "type": "updates",
       "title": "playing around with an arm and a biped and rl",
-      "url": "https://lonelyguy.tech/updates/2026-03-18-biped",
+      "url": "https://www.lonelyguy.tech/updates/2026-03-18-biped",
       "summary": "wanted to test the update page, so though might as well log about the biped, this is more of a random update.",
       "tags": [],
       "date": "2026-03-18"
@@ -106,7 +106,7 @@
     {
       "type": "articles",
       "title": "Syntagma, Building An Agentic Curriculum Lifecycle Management System",
-      "url": "https://lonelyguy.tech/articles/2026-07-22-syntagma",
+      "url": "https://www.lonelyguy.tech/articles/2026-07-22-syntagma",
       "summary": "A production-grade curriculum management platform for PES University: agentic refinement, 36-tool editor with reviewable drafts, git-like versioning, Jinja2-powered A4 PDFs, and a deliberately vanilla frontend.",
       "tags": [],
       "date": "2026-07-22"
@@ -114,7 +114,7 @@
     {
       "type": "articles",
       "title": "Project Halide, Building A Small-Model Diagnostic Workbench For Damaged Film",
-      "url": "https://lonelyguy.tech/articles/2026-06-16-project-halide",
+      "url": "https://www.lonelyguy.tech/articles/2026-06-16-project-halide",
       "summary": "An open-weight film diagnostics workbench built around MiniCPM-V 4.6, Nemotron-Mini-4B, real negative failure cases, and a validator that became as important as the model.",
       "tags": [],
       "date": "2026-06-16"
@@ -122,7 +122,7 @@
     {
       "type": "articles",
       "title": "Teaching a 1.5B LLM to be a SOC Analyst (Without Burning Down the Network)",
-      "url": "https://lonelyguy.tech/articles/2026-05-01-llm-soc-analyst",
+      "url": "https://www.lonelyguy.tech/articles/2026-05-01-llm-soc-analyst",
       "summary": "Fine-tuning a 1.5B LLM with GRPO to defend against realistic enterprise attack chains, and the unexpected lessons learned from reward hacking.",
       "tags": [],
       "date": "2026-05-01"
@@ -130,7 +130,7 @@
     {
       "type": "projects",
       "title": "Syntagma",
-      "url": "https://lonelyguy.tech/projects/syntagma",
+      "url": "https://www.lonelyguy.tech/projects/syntagma",
       "summary": "Agentic curriculum lifecycle management system for PES University. Faculty submit raw course content, the agent refines it into structured records, the 36-tool editor lets admins propose reviewable edits, and every state is snapshotable with full diff history and official A4 PDF output.",
       "tags": [
         "full-stack",
@@ -144,7 +144,7 @@
     {
       "type": "projects",
       "title": "Raijin LOB",
-      "url": "https://lonelyguy.tech/projects/raijin-lob",
+      "url": "https://www.lonelyguy.tech/projects/raijin-lob",
       "summary": "C++ limit order book engine built around low-latency market microstructure ideas, benchmarked publicly and now moving toward a simulator phase.",
       "tags": [
         "limit order book",
@@ -158,7 +158,7 @@
     {
       "type": "projects",
       "title": "Project Halide",
-      "url": "https://lonelyguy.tech/projects/project-halide",
+      "url": "https://www.lonelyguy.tech/projects/project-halide",
       "summary": "Small-model diagnostic workbench for damaged film scans using MiniCPM-V, Nemotron-Mini, strict validation, overlays, telemetry, and a Gradio light-table UI.",
       "tags": [
         "vision",
@@ -172,7 +172,7 @@
     {
       "type": "projects",
       "title": "Cybersec OpenEnv",
-      "url": "https://lonelyguy.tech/projects/cybersec-openenv",
+      "url": "https://www.lonelyguy.tech/projects/cybersec-openenv",
       "summary": "Long-horizon cyber-defense POMDP for training and evaluating small LLM SOC agents with GRPO, realistic attack chains, and reward-hacking resistant containment incentives.",
       "tags": [
         "llm agents",
@@ -186,7 +186,7 @@
     {
       "type": "projects",
       "title": "Breakout-DQN",
-      "url": "https://lonelyguy.tech/projects/breakout-dqn",
+      "url": "https://www.lonelyguy.tech/projects/breakout-dqn",
       "summary": "From-scratch Atari Breakout DQN study for building intuition around deep RL, preprocessing, replay, target networks, and early DeepMind-style agent design.",
       "tags": [
         "reinforcement learning",
@@ -200,7 +200,7 @@
     {
       "type": "gallery",
       "title": "Version comparison diff",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Side-by-side version comparison diff",
       "tags": [],
       "date": ""
@@ -208,7 +208,7 @@
     {
       "type": "gallery",
       "title": "Curriculum PDF preview",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Full curriculum PDF preview",
       "tags": [],
       "date": ""
@@ -216,7 +216,7 @@
     {
       "type": "gallery",
       "title": "Syntagma dashboard",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Syntagma dashboard",
       "tags": [],
       "date": ""
@@ -224,7 +224,7 @@
     {
       "type": "gallery",
       "title": "Syntagma agentic editor",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Agentic editor with chat, fields panel, and draft review",
       "tags": [],
       "date": ""
@@ -232,7 +232,7 @@
     {
       "type": "gallery",
       "title": "tree.lonelyguy.tech",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Project tree viewer",
       "tags": [],
       "date": ""
@@ -240,7 +240,7 @@
     {
       "type": "gallery",
       "title": "Cybersec OpenEnv",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Cybersec OpenEnv environment visualization",
       "tags": [],
       "date": ""
@@ -248,7 +248,7 @@
     {
       "type": "gallery",
       "title": "Raijin LOB benchmarks",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Raijin LOB benchmark brief",
       "tags": [],
       "date": ""
@@ -256,7 +256,7 @@
     {
       "type": "gallery",
       "title": "Project Halide workbench",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Project Halide diagnostic workbench interface",
       "tags": [],
       "date": ""
@@ -264,7 +264,7 @@
     {
       "type": "gallery",
       "title": "Humanoid circuit",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Humanoid robot circuit design",
       "tags": [],
       "date": ""
@@ -272,7 +272,7 @@
     {
       "type": "gallery",
       "title": "Biped arm simulation",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Bipedal robot arm simulation",
       "tags": [],
       "date": ""
@@ -280,7 +280,7 @@
     {
       "type": "gallery",
       "title": "Biped arm result",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Bipedal robot arm training result",
       "tags": [],
       "date": ""
@@ -288,7 +288,7 @@
     {
       "type": "gallery",
       "title": "Biped arm training graph",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Bipedal robot arm training graph",
       "tags": [],
       "date": ""
@@ -296,7 +296,7 @@
     {
       "type": "gallery",
       "title": "Clanker pose",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Clanker robot pose estimation",
       "tags": [],
       "date": ""
@@ -304,7 +304,7 @@
     {
       "type": "gallery",
       "title": "Shiori extension",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Shiori robot extension mechanism",
       "tags": [],
       "date": ""
@@ -312,7 +312,7 @@
     {
       "type": "gallery",
       "title": "Atari Breakout",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Atari Breakout game frame",
       "tags": [],
       "date": ""
@@ -320,7 +320,7 @@
     {
       "type": "gallery",
       "title": "Breakout preprocessing",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Preprocessed Breakout observation frame",
       "tags": [],
       "date": ""
@@ -328,7 +328,7 @@
     {
       "type": "gallery",
       "title": "Damaged 35mm negative",
-      "url": "https://lonelyguy.tech/gallery",
+      "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Damaged 35mm negative used to evaluate Project Halide",
       "tags": [],
       "date": ""
@@ -336,7 +336,7 @@
     {
       "type": "apps",
       "title": "tree",
-      "url": "https://lonelyguy.tech/apps",
+      "url": "https://www.lonelyguy.tech/apps",
       "summary": "Personal project tree viewer.",
       "tags": [
         "demo"
@@ -346,7 +346,7 @@
     {
       "type": "apps",
       "title": "Syntagma",
-      "url": "https://lonelyguy.tech/apps",
+      "url": "https://www.lonelyguy.tech/apps",
       "summary": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
       "tags": [
         "demo"
@@ -356,7 +356,7 @@
     {
       "type": "apps",
       "title": "Project Halide",
-      "url": "https://lonelyguy.tech/apps",
+      "url": "https://www.lonelyguy.tech/apps",
       "summary": "Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.",
       "tags": [
         "demo"
@@ -366,7 +366,7 @@
     {
       "type": "apps",
       "title": "Cybersec OpenEnv",
-      "url": "https://lonelyguy.tech/apps",
+      "url": "https://www.lonelyguy.tech/apps",
       "summary": "Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.",
       "tags": [
         "demo"
@@ -376,7 +376,7 @@
     {
       "type": "apps",
       "title": "Raijin LOB",
-      "url": "https://lonelyguy.tech/apps",
+      "url": "https://www.lonelyguy.tech/apps",
       "summary": "Documentation and public benchmarks for the C++ limit order book engine.",
       "tags": [
         "docs"

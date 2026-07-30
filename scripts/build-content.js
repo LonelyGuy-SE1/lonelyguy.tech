@@ -2188,27 +2188,27 @@ Sitemap: ${config.baseUrl}/sitemap.xml
 }
 
 async function submitIndexNow(config, updates, articles, gallery, projects) {
-  const key = "cb355484dea602688fda103ae42c93b6";
+  const key = "496f1371c0834c9bb30055449bdbe511";
+  const canonicalBase = "https://www.lonelyguy.tech";
   const urls = [];
 
-  // Collect all page URLs
-  urls.push(`${config.baseUrl}/`);
-  for (const r of updates) urls.push(`${config.baseUrl}/updates/${r.id}`);
-  for (const r of articles) urls.push(`${config.baseUrl}/articles/${r.id}`);
-  for (const r of projects) urls.push(`${config.baseUrl}/projects/${r.id}`);
-  urls.push(`${config.baseUrl}/gallery`);
-  urls.push(`${config.baseUrl}/search`);
-  urls.push(`${config.baseUrl}/stack`);
-  urls.push(`${config.baseUrl}/contact`);
-  urls.push(`${config.baseUrl}/updates`);
-  urls.push(`${config.baseUrl}/articles`);
-  urls.push(`${config.baseUrl}/projects`);
-  urls.push(`${config.baseUrl}/apps`);
+  urls.push(`${canonicalBase}/`);
+  for (const r of updates) urls.push(`${canonicalBase}/updates/${r.id}`);
+  for (const r of articles) urls.push(`${canonicalBase}/articles/${r.id}`);
+  for (const r of projects) urls.push(`${canonicalBase}/projects/${r.id}`);
+  urls.push(`${canonicalBase}/gallery`);
+  urls.push(`${canonicalBase}/search`);
+  urls.push(`${canonicalBase}/stack`);
+  urls.push(`${canonicalBase}/contact`);
+  urls.push(`${canonicalBase}/updates`);
+  urls.push(`${canonicalBase}/articles`);
+  urls.push(`${canonicalBase}/projects`);
+  urls.push(`${canonicalBase}/apps`);
 
   const payload = {
     host: "www.lonelyguy.tech",
     key,
-    keyLocation: `https://www.lonelyguy.tech/${key}.txt`,
+    keyLocation: `${canonicalBase}/${key}.txt`,
     urlList: urls,
   };
 

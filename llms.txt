@@ -4,22 +4,22 @@
 Lonely Guy is building toward autonomous robotic assistants through reinforcement learning, robotics, world models, embodied AI, LLM agents, and systems work.
 
 ## Navigation
-- Home: https://lonelyguy.tech/
-- Stack: https://lonelyguy.tech/stack
-- Projects: https://lonelyguy.tech/projects
-- Articles: https://lonelyguy.tech/articles
-- Updates: https://lonelyguy.tech/updates
-- Live Apps: https://lonelyguy.tech/apps
-- Gallery: https://lonelyguy.tech/gallery
-- Search index JSON: https://lonelyguy.tech/search-index.json
-- Site index JSON: https://lonelyguy.tech/site-index.json
+- Home: https://www.lonelyguy.tech/
+- Stack: https://www.lonelyguy.tech/stack
+- Projects: https://www.lonelyguy.tech/projects
+- Articles: https://www.lonelyguy.tech/articles
+- Updates: https://www.lonelyguy.tech/updates
+- Live Apps: https://www.lonelyguy.tech/apps
+- Gallery: https://www.lonelyguy.tech/gallery
+- Search index JSON: https://www.lonelyguy.tech/search-index.json
+- Site index JSON: https://www.lonelyguy.tech/site-index.json
 
 ## Projects
-- [Syntagma](https://lonelyguy.tech/projects/syntagma): Agentic curriculum lifecycle management system for PES University. Faculty submit raw course content, the agent refines it into structured records, the 36-tool editor lets admins propose reviewable edits, and every state is snapshotable with full diff history and official A4 PDF output.
-- [Raijin LOB](https://lonelyguy.tech/projects/raijin-lob): C++ limit order book engine built around low-latency market microstructure ideas, benchmarked publicly and now moving toward a simulator phase.
-- [Project Halide](https://lonelyguy.tech/projects/project-halide): Small-model diagnostic workbench for damaged film scans using MiniCPM-V, Nemotron-Mini, strict validation, overlays, telemetry, and a Gradio light-table UI.
-- [Cybersec OpenEnv](https://lonelyguy.tech/projects/cybersec-openenv): Long-horizon cyber-defense POMDP for training and evaluating small LLM SOC agents with GRPO, realistic attack chains, and reward-hacking resistant containment incentives.
-- [Breakout-DQN](https://lonelyguy.tech/projects/breakout-dqn): From-scratch Atari Breakout DQN study for building intuition around deep RL, preprocessing, replay, target networks, and early DeepMind-style agent design.
+- [Syntagma](https://www.lonelyguy.tech/projects/syntagma): Agentic curriculum lifecycle management system for PES University. Faculty submit raw course content, the agent refines it into structured records, the 36-tool editor lets admins propose reviewable edits, and every state is snapshotable with full diff history and official A4 PDF output.
+- [Raijin LOB](https://www.lonelyguy.tech/projects/raijin-lob): C++ limit order book engine built around low-latency market microstructure ideas, benchmarked publicly and now moving toward a simulator phase.
+- [Project Halide](https://www.lonelyguy.tech/projects/project-halide): Small-model diagnostic workbench for damaged film scans using MiniCPM-V, Nemotron-Mini, strict validation, overlays, telemetry, and a Gradio light-table UI.
+- [Cybersec OpenEnv](https://www.lonelyguy.tech/projects/cybersec-openenv): Long-horizon cyber-defense POMDP for training and evaluating small LLM SOC agents with GRPO, realistic attack chains, and reward-hacking resistant containment incentives.
+- [Breakout-DQN](https://www.lonelyguy.tech/projects/breakout-dqn): From-scratch Atari Breakout DQN study for building intuition around deep RL, preprocessing, replay, target networks, and early DeepMind-style agent design.
 
 ## Live Apps
 - [tree](https://tree.lonelyguy.tech): Personal project tree viewer.
@@ -29,14 +29,14 @@ Lonely Guy is building toward autonomous robotic assistants through reinforcemen
 - [Raijin LOB](https://lonelyguy-se1.github.io/Raijin-LOB/): Documentation and public benchmarks for the C++ limit order book engine.
 
 ## Articles
-- [Syntagma, Building An Agentic Curriculum Lifecycle Management System](https://lonelyguy.tech/articles/2026-07-22-syntagma): A production-grade curriculum management platform for PES University: agentic refinement, 36-tool editor with reviewable drafts, git-like versioning, Jinja2-powered A4 PDFs, and a deliberately vanilla frontend.
-- [Project Halide, Building A Small-Model Diagnostic Workbench For Damaged Film](https://lonelyguy.tech/articles/2026-06-16-project-halide): An open-weight film diagnostics workbench built around MiniCPM-V 4.6, Nemotron-Mini-4B, real negative failure cases, and a validator that became as important as the model.
-- [Teaching a 1.5B LLM to be a SOC Analyst (Without Burning Down the Network)](https://lonelyguy.tech/articles/2026-05-01-llm-soc-analyst): Fine-tuning a 1.5B LLM with GRPO to defend against realistic enterprise attack chains, and the unexpected lessons learned from reward hacking.
+- [Syntagma, Building An Agentic Curriculum Lifecycle Management System](https://www.lonelyguy.tech/articles/2026-07-22-syntagma): A production-grade curriculum management platform for PES University: agentic refinement, 36-tool editor with reviewable drafts, git-like versioning, Jinja2-powered A4 PDFs, and a deliberately vanilla frontend.
+- [Project Halide, Building A Small-Model Diagnostic Workbench For Damaged Film](https://www.lonelyguy.tech/articles/2026-06-16-project-halide): An open-weight film diagnostics workbench built around MiniCPM-V 4.6, Nemotron-Mini-4B, real negative failure cases, and a validator that became as important as the model.
+- [Teaching a 1.5B LLM to be a SOC Analyst (Without Burning Down the Network)](https://www.lonelyguy.tech/articles/2026-05-01-llm-soc-analyst): Fine-tuning a 1.5B LLM with GRPO to defend against realistic enterprise attack chains, and the unexpected lessons learned from reward hacking.
 
 ## Updates
-- [June 2026 Updates - Raijin, Halide, Shiori, Android, and Simulation](https://lonelyguy.tech/updates/2026-06-23-updates): Progress update covering Raijin phase one, Project Halide, a Shiori Chrome extension, Android system work, competitive programming, and simulation work.
-- [Hackathons + Humanoid Simulation + UAV Conference + Breakout](https://lonelyguy.tech/updates/2026-04-11-updates): Qualified for some interesting hackathons, Good progress is being done on training the humanoid robot + Will be attending a UAV conference + Breakout might have to wait a bit.
-- [playing around with an arm and a biped and rl](https://lonelyguy.tech/updates/2026-03-18-biped): wanted to test the update page, so though might as well log about the biped, this is more of a random update.
+- [June 2026 Updates - Raijin, Halide, Shiori, Android, and Simulation](https://www.lonelyguy.tech/updates/2026-06-23-updates): Progress update covering Raijin phase one, Project Halide, a Shiori Chrome extension, Android system work, competitive programming, and simulation work.
+- [Hackathons + Humanoid Simulation + UAV Conference + Breakout](https://www.lonelyguy.tech/updates/2026-04-11-updates): Qualified for some interesting hackathons, Good progress is being done on training the humanoid robot + Will be attending a UAV conference + Breakout might have to wait a bit.
+- [playing around with an arm and a biped and rl](https://www.lonelyguy.tech/updates/2026-03-18-biped): wanted to test the update page, so though might as well log about the biped, this is more of a random update.
 
 ## Profiles
 - [GitHub](https://github.com/LonelyGuy-SE1)
