@@ -24,6 +24,7 @@ Lonely Guy is building toward autonomous robotic assistants through reinforcemen
 ## Live Apps
 - [tree](https://tree.lonelyguy.tech): Personal project tree viewer.
 - [Syntagma](https://syntagma.lonelyguy.tech/): Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.
+- [Morse Academy](https://morse.lonelyguy.tech/): High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification.
 - [Project Halide](https://huggingface.co/spaces/build-small-hackathon/project-halide): Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry.
 - [Cybersec OpenEnv](https://huggingface.co/spaces/Lonelyguyse1/cybersec): Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO.
 - [Raijin LOB](https://lonelyguy-se1.github.io/Raijin-LOB/): Documentation and public benchmarks for the C++ limit order book engine.

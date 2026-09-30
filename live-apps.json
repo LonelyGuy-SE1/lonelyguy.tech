@@ -20,6 +20,17 @@
     ]
   },
   {
+    "title": "Morse Academy",
+    "url": "https://morse.lonelyguy.tech/",
+    "type": "demo",
+    "description": "High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification.",
+    "image": "gallery/morse.og.png",
+    "links": [
+      { "label": "app", "url": "https://morse.lonelyguy.tech/" },
+      { "label": "source", "url": "https://github.com/LonelyGuy-SE1/morse" }
+    ]
+  },
+  {
     "title": "Project Halide",
     "url": "https://huggingface.co/spaces/build-small-hackathon/project-halide",
     "type": "demo",

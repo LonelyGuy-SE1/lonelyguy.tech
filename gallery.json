@@ -83,5 +83,10 @@
     "url": "gallery/tree.jpeg",
     "alt": "Project tree viewer",
     "caption": "tree.lonelyguy.tech"
+  },
+  {
+    "url": "gallery/morse.og.png",
+    "alt": "Morse Academy training platform interface",
+    "caption": "Morse Academy"
   }
 ]

@@ -25,14 +25,14 @@
     "title": "Gallery",
     "summary": "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
     "url": "/gallery",
-    "content": "tree.lonelyguy.tech Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor Shiori extension Humanoid circuit Cybersec OpenEnv Clanker pose Biped arm simulation Biped arm result Biped arm training graph Raijin LOB benchmarks Atari Breakout Breakout preprocessing Damaged 35mm negative Project Halide workbench"
+    "content": "Morse Academy tree.lonelyguy.tech Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor Shiori extension Humanoid circuit Cybersec OpenEnv Clanker pose Biped arm simulation Biped arm result Biped arm training graph Raijin LOB benchmarks Atari Breakout Breakout preprocessing Damaged 35mm negative Project Halide workbench"
   },
   {
     "type": "page",
     "title": "Subdomains & Live Apps",
     "summary": "Deployed apps, documentation sites, and live demos.",
     "url": "/apps",
-    "content": "tree Personal project tree viewer. Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
+    "content": "tree Personal project tree viewer. Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Morse Academy High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
   },
   {
     "type": "updates",
@@ -185,6 +185,13 @@
   },
   {
     "type": "gallery",
+    "title": "Morse Academy",
+    "summary": "Morse Academy training platform interface",
+    "url": "/gallery",
+    "content": "gallery/morse.og.png"
+  },
+  {
+    "type": "gallery",
     "title": "tree.lonelyguy.tech",
     "summary": "Project tree viewer",
     "url": "/gallery",
@@ -316,6 +323,16 @@
     "type": "apps",
     "title": "Syntagma",
     "summary": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
+    "url": "/apps",
+    "tags": [
+      "demo"
+    ],
+    "content": ""
+  },
+  {
+    "type": "apps",
+    "title": "Morse Academy",
+    "summary": "High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification.",
     "url": "/apps",
     "tags": [
       "demo"

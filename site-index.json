@@ -31,7 +31,7 @@
       "location": "India"
     }
   },
-  "generatedAt": "2026-09-30T13:36:52.857Z",
+  "generatedAt": "2026-09-30T13:43:23.745Z",
   "routes": [
     {
       "type": "page",
@@ -212,6 +212,14 @@
     },
     {
       "type": "gallery",
+      "title": "Morse Academy",
+      "url": "https://www.lonelyguy.tech/gallery",
+      "summary": "Morse Academy training platform interface",
+      "tags": [],
+      "date": ""
+    },
+    {
+      "type": "gallery",
       "title": "tree.lonelyguy.tech",
       "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Project tree viewer",
@@ -361,6 +369,16 @@
       "title": "Syntagma",
       "url": "https://www.lonelyguy.tech/apps",
       "summary": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
+      "tags": [
+        "demo"
+      ],
+      "date": ""
+    },
+    {
+      "type": "apps",
+      "title": "Morse Academy",
+      "url": "https://www.lonelyguy.tech/apps",
+      "summary": "High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification.",
       "tags": [
         "demo"
       ],
