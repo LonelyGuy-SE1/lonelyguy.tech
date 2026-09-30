@@ -25,14 +25,28 @@
     "title": "Gallery",
     "summary": "Visual artifacts from Lonely Guy's robotics, reinforcement learning, cyber environment, and project work.",
     "url": "/gallery",
-    "content": "Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor tree.lonelyguy.tech Cybersec OpenEnv Raijin LOB benchmarks Project Halide workbench Humanoid circuit Biped arm simulation Biped arm result Biped arm training graph Clanker pose Shiori extension Atari Breakout Breakout preprocessing Damaged 35mm negative"
+    "content": "Morse Academy tree.lonelyguy.tech Version comparison diff Curriculum PDF preview Syntagma dashboard Syntagma agentic editor Shiori extension Humanoid circuit Cybersec OpenEnv Clanker pose Biped arm simulation Biped arm result Biped arm training graph Raijin LOB benchmarks Atari Breakout Breakout preprocessing Damaged 35mm negative Project Halide workbench"
   },
   {
     "type": "page",
     "title": "Subdomains & Live Apps",
     "summary": "Deployed apps, documentation sites, and live demos.",
     "url": "/apps",
-    "content": "tree Personal project tree viewer. Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
+    "content": "tree Personal project tree viewer. Syntagma Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline. Morse Academy High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification. Project Halide Small-model diagnostic workbench for damaged film scans with validation overlays and telemetry. Cybersec OpenEnv Long-horizon cyber-defense POMDP for training small LLM SOC agents with GRPO. Raijin LOB Documentation and public benchmarks for the C++ limit order book engine."
+  },
+  {
+    "type": "updates",
+    "title": "Events + Arch Setups + Going Independent + Ham Radio",
+    "summary": "A mild update. Attended some invite-only events, moved all my devices to Linux, finished a summer lab internship, decided to go independent on research, and started prepping for a ham radio license.",
+    "url": "/updates/2026-09-30-updates",
+    "date": "2026-09-30",
+    "tags": [
+      "systems",
+      "linux",
+      "research",
+      "ham radio"
+    ],
+    "content": "it has been about 3 months since the last update, and this one is pretty mild tbh, not much tangible happened. i attended a few exclusive invite-only tech events offline. the rest of the time i spent playing with my systems. as of now all my devices run linux, mostly arch, with one ubuntu machine which is the one i daily drive to uni. i heavily riced my arch setup, and i also modified my tablets with custom ROMs. i was running a custom ROM on one tablet for a while, but now all of them are customized, with a few modifications on top. i don&#39;t remember if i mentioned this in the previous update, but i interned with a lab in my uni over the summer. i wanted to intern in a uni lab at least once, so this fulfills that. i&#39;ll most probably try to intern at a company outside uni this year. i also spoke to a bunch of people these last few months. i talked to the chairperson of my department about how i should proceed with my research, and i decided it&#39;s better to go ahead by myself as an independent researcher, since there&#39;s not much in what i&#39;m doing that the uni can actually help with. i also spoke to a few professors from the CS and ECE departments about hardware, and realized my best bet is to work with corporate labs to truly work on what matters. so in the upcoming months i&#39;ll try to build new connections that can get me there. i&#39;ve decided not to use any of my existing connections or known paths (parents, acquaintances), i want to forge new ones and do it that way. acads.. well, i&#39;m not sure i&#39;m very interested in it, since the field itself is declining. i also realized i already know most of what&#39;s being taught, it&#39;s just that the language and terminology differ. so i may not perform excellently in the exams, but at the end of the day i&#39;m already using all of those concepts (CN, OS, math, etc.) in what i build. in terms of projects, this quarter was pretty dry. there were a few, and the last one was Syntagma for the internship. most of what i did isn&#39;t really something i can post on GitHub, for example the dotfiles for hyprland. they take a lot of time to make, but i can&#39;t just put them on GitHub ;-; after the internship i took a small break of about 2 months. i played a few games (figured i might as well try them with the compute i have) and i still play for a while every day, but there&#39;s no game yet that i can truly say i love. i also upgraded my setup, and now i think i&#39;m back in shape. it&#39;s back to business, and i&#39;m expecting some really good progress by winter. oh wait, btw, i&#39;m prepping for my ham station operator license, so i should have a station and callsign soon. not sure when the next exam window is. i intend to take the lifetime license. i&#39;m sure i can pass the restricted exam, but once i&#39;m comfortable with morse code i&#39;ll go directly for the general license. hopefully this becomes a fun thing i have with me for my entire life. the thought of communicating with operators all over the world is already giving me joy!!"
   },
   {
     "type": "updates",
@@ -171,6 +185,20 @@
   },
   {
     "type": "gallery",
+    "title": "Morse Academy",
+    "summary": "Morse Academy training platform interface",
+    "url": "/gallery",
+    "content": "gallery/morse.og.png"
+  },
+  {
+    "type": "gallery",
+    "title": "tree.lonelyguy.tech",
+    "summary": "Project tree viewer",
+    "url": "/gallery",
+    "content": "gallery/tree.jpeg"
+  },
+  {
+    "type": "gallery",
     "title": "Version comparison diff",
     "summary": "Side-by-side version comparison diff",
     "url": "/gallery",
@@ -199,10 +227,17 @@
   },
   {
     "type": "gallery",
-    "title": "tree.lonelyguy.tech",
-    "summary": "Project tree viewer",
+    "title": "Shiori extension",
+    "summary": "Shiori robot extension mechanism",
     "url": "/gallery",
-    "content": "gallery/tree.jpeg"
+    "content": "gallery/shiori.extension.png"
+  },
+  {
+    "type": "gallery",
+    "title": "Humanoid circuit",
+    "summary": "Humanoid robot circuit design",
+    "url": "/gallery",
+    "content": "gallery/humanoid.circuit.png"
   },
   {
     "type": "gallery",
@@ -213,24 +248,10 @@
   },
   {
     "type": "gallery",
-    "title": "Raijin LOB benchmarks",
-    "summary": "Raijin LOB benchmark brief",
+    "title": "Clanker pose",
+    "summary": "Clanker robot pose estimation",
     "url": "/gallery",
-    "content": "gallery/bench.raijin.png"
-  },
-  {
-    "type": "gallery",
-    "title": "Project Halide workbench",
-    "summary": "Project Halide diagnostic workbench interface",
-    "url": "/gallery",
-    "content": "assets/halide/halide-app.png"
-  },
-  {
-    "type": "gallery",
-    "title": "Humanoid circuit",
-    "summary": "Humanoid robot circuit design",
-    "url": "/gallery",
-    "content": "gallery/humanoid.circuit.png"
+    "content": "gallery/clanker.pose.png"
   },
   {
     "type": "gallery",
@@ -255,17 +276,10 @@
   },
   {
     "type": "gallery",
-    "title": "Clanker pose",
-    "summary": "Clanker robot pose estimation",
+    "title": "Raijin LOB benchmarks",
+    "summary": "Raijin LOB benchmark brief",
     "url": "/gallery",
-    "content": "gallery/clanker.pose.png"
-  },
-  {
-    "type": "gallery",
-    "title": "Shiori extension",
-    "summary": "Shiori robot extension mechanism",
-    "url": "/gallery",
-    "content": "gallery/shiori.extension.png"
+    "content": "gallery/bench.raijin.png"
   },
   {
     "type": "gallery",
@@ -289,6 +303,13 @@
     "content": "assets/halide/real-35mm-negative-banner.jpg"
   },
   {
+    "type": "gallery",
+    "title": "Project Halide workbench",
+    "summary": "Project Halide diagnostic workbench interface",
+    "url": "/gallery",
+    "content": "assets/halide/halide-app.png"
+  },
+  {
     "type": "apps",
     "title": "tree",
     "summary": "Personal project tree viewer.",
@@ -302,6 +323,16 @@
     "type": "apps",
     "title": "Syntagma",
     "summary": "Agentic curriculum lifecycle management system with 36-tool editor, versioning, and PDF pipeline.",
+    "url": "/apps",
+    "tags": [
+      "demo"
+    ],
+    "content": ""
+  },
+  {
+    "type": "apps",
+    "title": "Morse Academy",
+    "summary": "High-Speed Neo-Brutalist Morse Code Academy & CW Telegraphy Tutor featuring Koch Method, Farnsworth Timing, Iambic Keyer, and Speed Certification.",
     "url": "/apps",
     "tags": [
       "demo"

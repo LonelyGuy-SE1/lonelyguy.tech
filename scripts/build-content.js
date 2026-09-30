@@ -548,9 +548,15 @@ async function readMarkdownCollection(directory) {
         date: parsed.attributes.date || fallbackDate,
         updated: parsed.attributes.updated || parsed.attributes.date || fallbackDate,
         dateLabel: parsed.dateLabel,
-        summary: parsed.attributes.summary || fallbackSummary(body),
+        summary:
+          parsed.attributes.summary ||
+          parsed.attributes.description ||
+          fallbackSummary(body),
         seoTitle: parsed.attributes.seoTitle || "",
-        seoDescription: parsed.attributes.seoDescription || "",
+        seoDescription:
+          parsed.attributes.seoDescription ||
+          parsed.attributes.description ||
+          "",
         canonical: parsed.attributes.canonical || "",
         tags: parsed.attributes.tags || [],
         featured: parsed.attributes.featured || false,
