@@ -31,7 +31,7 @@
       "location": "India"
     }
   },
-  "generatedAt": "2026-07-30T06:10:59.792Z",
+  "generatedAt": "2026-09-30T13:36:52.857Z",
   "routes": [
     {
       "type": "page",
@@ -72,6 +72,19 @@
       "summary": "Deployed apps, documentation sites, and live demos.",
       "tags": [],
       "date": ""
+    },
+    {
+      "type": "updates",
+      "title": "Events + Arch Setups + Going Independent + Ham Radio",
+      "url": "https://www.lonelyguy.tech/updates/2026-09-30-updates",
+      "summary": "A mild update. Attended some invite-only events, moved all my devices to Linux, finished a summer lab internship, decided to go independent on research, and started prepping for a ham radio license.",
+      "tags": [
+        "systems",
+        "linux",
+        "research",
+        "ham radio"
+      ],
+      "date": "2026-09-30"
     },
     {
       "type": "updates",
@@ -199,6 +212,14 @@
     },
     {
       "type": "gallery",
+      "title": "tree.lonelyguy.tech",
+      "url": "https://www.lonelyguy.tech/gallery",
+      "summary": "Project tree viewer",
+      "tags": [],
+      "date": ""
+    },
+    {
+      "type": "gallery",
       "title": "Version comparison diff",
       "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Side-by-side version comparison diff",
@@ -231,9 +252,17 @@
     },
     {
       "type": "gallery",
-      "title": "tree.lonelyguy.tech",
+      "title": "Shiori extension",
       "url": "https://www.lonelyguy.tech/gallery",
-      "summary": "Project tree viewer",
+      "summary": "Shiori robot extension mechanism",
+      "tags": [],
+      "date": ""
+    },
+    {
+      "type": "gallery",
+      "title": "Humanoid circuit",
+      "url": "https://www.lonelyguy.tech/gallery",
+      "summary": "Humanoid robot circuit design",
       "tags": [],
       "date": ""
     },
@@ -247,25 +276,9 @@
     },
     {
       "type": "gallery",
-      "title": "Raijin LOB benchmarks",
+      "title": "Clanker pose",
       "url": "https://www.lonelyguy.tech/gallery",
-      "summary": "Raijin LOB benchmark brief",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "Project Halide workbench",
-      "url": "https://www.lonelyguy.tech/gallery",
-      "summary": "Project Halide diagnostic workbench interface",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "Humanoid circuit",
-      "url": "https://www.lonelyguy.tech/gallery",
-      "summary": "Humanoid robot circuit design",
+      "summary": "Clanker robot pose estimation",
       "tags": [],
       "date": ""
     },
@@ -295,17 +308,9 @@
     },
     {
       "type": "gallery",
-      "title": "Clanker pose",
+      "title": "Raijin LOB benchmarks",
       "url": "https://www.lonelyguy.tech/gallery",
-      "summary": "Clanker robot pose estimation",
-      "tags": [],
-      "date": ""
-    },
-    {
-      "type": "gallery",
-      "title": "Shiori extension",
-      "url": "https://www.lonelyguy.tech/gallery",
-      "summary": "Shiori robot extension mechanism",
+      "summary": "Raijin LOB benchmark brief",
       "tags": [],
       "date": ""
     },
@@ -330,6 +335,14 @@
       "title": "Damaged 35mm negative",
       "url": "https://www.lonelyguy.tech/gallery",
       "summary": "Damaged 35mm negative used to evaluate Project Halide",
+      "tags": [],
+      "date": ""
+    },
+    {
+      "type": "gallery",
+      "title": "Project Halide workbench",
+      "url": "https://www.lonelyguy.tech/gallery",
+      "summary": "Project Halide diagnostic workbench interface",
       "tags": [],
       "date": ""
     },
