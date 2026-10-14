@@ -1961,6 +1961,28 @@ textarea.contact-field {
     display: none;
   }
 
+  .header-actions {
+    min-width: 0;
+  }
+
+  .header-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .header-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
   .hero h1 {
     max-width: none;
     font-size: clamp(2.1rem, 10.5vw, 4.1rem);
