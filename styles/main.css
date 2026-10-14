@@ -1892,6 +1892,10 @@ textarea.contact-field {
 }
 
 @media (max-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .hero,
   .panel-head,
   .updates-layout,
@@ -1959,7 +1963,14 @@ textarea.contact-field {
 
   .hero h1 {
     max-width: none;
-    font-size: clamp(2.6rem, 16vw, 4.1rem);
+    font-size: clamp(2.1rem, 10.5vw, 4.1rem);
+    overflow-wrap: break-word;
+    hyphens: manual;
+  }
+
+  .hero-copy,
+  .hero-media {
+    min-width: 0;
   }
 
   .stack-card {
