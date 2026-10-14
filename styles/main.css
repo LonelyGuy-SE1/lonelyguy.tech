@@ -613,6 +613,18 @@ summary,
   object-position: center bottom;
 }
 
+.hero-art:has(video) {
+  min-height: 0;
+}
+
+.hero-art video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  background: var(--pitch-black);
+}
+
 .hero-image-note {
   padding-top: 0.9rem;
   border-top: 1px solid var(--line);
@@ -1892,6 +1904,10 @@ textarea.contact-field {
 }
 
 @media (max-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .hero,
   .panel-head,
   .updates-layout,
@@ -1957,9 +1973,48 @@ textarea.contact-field {
     display: none;
   }
 
+  .header-actions {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .header-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .header-search {
+    flex: 0 0 auto;
+  }
+
+  .header-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .header-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
   .hero h1 {
     max-width: none;
-    font-size: clamp(2.6rem, 16vw, 4.1rem);
+    font-size: clamp(2.1rem, 10.5vw, 4.1rem);
+    overflow-wrap: break-word;
+    hyphens: manual;
+  }
+
+  .hero-copy,
+  .hero-media {
+    min-width: 0;
   }
 
   .stack-card {
@@ -2331,6 +2386,10 @@ textarea.contact-field {
 }
 
 @media (max-width: 640px) {
+  .site-footer {
+    padding-bottom: 4.5rem;
+  }
+
   .assistant-panel {
     right: 0.65rem;
     bottom: 4.5rem;
@@ -2344,8 +2403,23 @@ textarea.contact-field {
     scroll-behavior: auto;
   }
 
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .scroll-progress-bar {
     transition: none;
   }
 
+}
+
+.prerender-list li {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
 }

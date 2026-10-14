@@ -863,8 +863,8 @@ function headerHtml(activePath = "") {
   const breadcrumbLabel = active ? active[2] : "home";
   return `<header class="site-header" id="top">
       <div class="site-width header-inner">
-        <a class="brand" href="/" data-scroll-top>
-          <img class="brand-mark" src="/assets/SE1.jpg" alt="" width="640" height="640" decoding="async" />
+        <a class="brand" href="/" data-scroll-top aria-label="lonely guy">
+          <img class="brand-mark" src="/assets/SE1.webp" alt="" width="640" height="640" decoding="async" />
           <span class="brand-copy"><strong>lonely guy</strong></span>
         </a>
 
@@ -2326,6 +2326,23 @@ async function updateHomepage(config, assets, updates, articles, projects, liveA
     .replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/>/, `<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1" />`);
 
   html = updateHeadJsonLd(html, config, projects, articles);
+
+  // Server-render a plain project list so crawlers and no-JS visitors see
+  // real links instead of "loading projects...". main.js replaces it on load.
+  const projectFallback = projects.length
+    ? `<ul class="line-list prerender-list">${projects
+        .map(
+          (record) =>
+            `<li><a href="/projects/${escapeAttr(record.id)}">${escapeHtml(record.title)}</a>${
+              record.summary ? `<span>${escapeHtml(record.summary)}</span>` : ""
+            }</li>`,
+        )
+        .join("")}</ul>`
+    : '<p class="dynamic-note">loading projects...</p>';
+  html = html.replace(
+    /(<aside[^>]*id="projects-list"[^>]*>)[\s\S]*?(<\/aside>)/,
+    `$1\n                ${projectFallback}\n              $2`,
+  );
 
   const speculationRules = `<!-- Speculation Rules: conservative same-origin prerender -->
     <script type="speculationrules">
