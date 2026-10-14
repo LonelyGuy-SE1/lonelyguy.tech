@@ -613,6 +613,18 @@ summary,
   object-position: center bottom;
 }
 
+.hero-art:has(video) {
+  min-height: 0;
+}
+
+.hero-art video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  background: var(--pitch-black);
+}
+
 .hero-image-note {
   padding-top: 0.9rem;
   border-top: 1px solid var(--line);
@@ -1962,7 +1974,17 @@ textarea.contact-field {
   }
 
   .header-actions {
+    flex: 1 1 auto;
     min-width: 0;
+  }
+
+  .header-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .header-search {
+    flex: 0 0 auto;
   }
 
   .header-tabs {
