@@ -863,8 +863,8 @@ function headerHtml(activePath = "") {
   const breadcrumbLabel = active ? active[2] : "home";
   return `<header class="site-header" id="top">
       <div class="site-width header-inner">
-        <a class="brand" href="/" data-scroll-top>
-          <img class="brand-mark" src="/assets/SE1.jpg" alt="" width="640" height="640" decoding="async" />
+        <a class="brand" href="/" data-scroll-top aria-label="lonely guy">
+          <img class="brand-mark" src="/assets/SE1.webp" alt="" width="640" height="640" decoding="async" />
           <span class="brand-copy"><strong>lonely guy</strong></span>
         </a>
 
