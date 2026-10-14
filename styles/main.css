@@ -2364,6 +2364,10 @@ textarea.contact-field {
 }
 
 @media (max-width: 640px) {
+  .site-footer {
+    padding-bottom: 4.5rem;
+  }
+
   .assistant-panel {
     right: 0.65rem;
     bottom: 4.5rem;
@@ -2375,6 +2379,14 @@ textarea.contact-field {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
   .scroll-progress-bar {
